@@ -1,5 +1,7 @@
 export enum IActionTypes
 {
+    RemoveTeam = 'RemoveTeam',
+    RenameTeam = 'RenameTeam',
     AddTeam = "AddTeam"
 }
 export interface teamState {
@@ -8,6 +10,6 @@ export interface teamState {
 interface IAddTeamAction
 {
     type: IActionTypes.AddTeam;
-    payload: { teamName: string }
+    payload: { teamName: string, teamId: number,newName: string, }
 }
 export type ActionTypes = IAddTeamAction;

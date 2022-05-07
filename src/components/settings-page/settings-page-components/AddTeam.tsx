@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import styled from 'styled-components';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { addTeamAction } from '../../../store/reducers/team-reducer';
+import { addTeamAction,removeTeamAction } from '../../../store/reducers/team-reducer';
+import { Teams } from './Teams';
 
 const StyledAddTeam = styled.div` 
     margin-top: 40px;
@@ -40,11 +41,13 @@ const Top = styled.div`
     align-items: stretch;
 `
 
+
 export const AddTeam: React.FC = () => 
 {
     const [teamName, setTeamName] = useState<string>("")
     const teams = useTypedSelector(state => state.teams.teams);
     const input = useRef<HTMLInputElement>();
+    const [isInputing,setIsInputing] = useState(false)
     const dispatch: Dispatch = useDispatch();
     const addTeam = () =>
     {
@@ -54,10 +57,12 @@ export const AddTeam: React.FC = () =>
         }
         setTeamName("")
     }
+  
     return (
         <StyledAddTeam>
+            <Teams/>
             <Top>
-                <Input ref={input} value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
+                <Input  value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
                 <Button onClick={addTeam}>Add</Button>
             </Top>
         </StyledAddTeam>
