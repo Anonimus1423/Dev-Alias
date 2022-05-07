@@ -23,12 +23,8 @@ const GameTitle = styled.h1`
         color: ${({ theme }) => theme.colors.thirdTextColor};
     }
 `
-const Button = styled(btn)`
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+export const Button = styled(btn)`
     margin-top: 25px;
-    transform-origin: center;
 `
 
 export const StartPage: React.FC<IPages> = ({ page, setPage  }) => 

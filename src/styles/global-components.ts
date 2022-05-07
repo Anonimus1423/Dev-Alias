@@ -28,7 +28,11 @@ export const Button = styled.button`
     border: 2px solid ${({ theme }) => theme.colors.secondColor};
     position: relative;
     transition: 0.3s;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     cursor: pointer;
+    transform-origin: center;
     &:before
     {
         content: "";
@@ -43,7 +47,6 @@ export const Button = styled.button`
         transition: 0.3s;
         z-index: -1;
     }
-
     &:hover
     {
         color: ${({ theme }) => theme.colors.secondTextColor}
@@ -52,6 +55,19 @@ export const Button = styled.button`
     {
         width: 110px;
         height: 110px;
+    }
+`
+export const InvertedButton = styled(Button)`
+    border: 1px solid ${({ theme }) => theme.colors.quartersColor};
+    color: ${({ theme }) => theme.colors.secondTextColor};
+    letter-spacing: 1px;
+    &:before
+    {
+        background-color: ${({ theme }) => theme.colors.quartersColor};
+    }
+    &:hover
+    {
+        color: ${({ theme }) => theme.colors.defaultTextColor}
     }
 `
 export const TopWhite = styled.div`

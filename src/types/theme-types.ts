@@ -3,6 +3,7 @@ interface IColors {
     mainColor: string;
     secondColor: string;
     thirdColor: string;
+    quartersColor: string;
     defaultTextColor: string;
     secondTextColor: string;
     thirdTextColor: string;
