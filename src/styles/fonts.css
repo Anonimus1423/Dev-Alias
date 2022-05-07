@@ -1,0 +1,10 @@
+@font-face {
+    font-family: redwing;
+    font-weight: normal;
+    src: url("../../public/fonts/Redwing-Light.otf");
+}
+@font-face {
+    font-family: redwing;
+    font-weight: bold;
+    src: url("../../public/fonts/Redwing-Medium.otf");
+}
