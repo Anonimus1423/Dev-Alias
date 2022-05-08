@@ -69,11 +69,13 @@ export const AddPoints = () => {
         }else {
             if(newPoints<11){
                 if(!IsErrorWasPrintedScreen('Minimum Victory Points` 10')){
+                    dispatch(changePoint(11))
                     toast.error("Minimum Victory Points` 10")
                 }
             }else{
                 if(!IsErrorWasPrintedScreen('Maximum Victory Points` 360')){
                     toast.error("Maximum Victory Points` 360")
+                    dispatch(changePoint(360))
                 }
             }
         }
@@ -85,7 +87,7 @@ export const AddPoints = () => {
                 VICTORY POINTS
             </PoinstTitle>
             <PointBlock>
-                <PointInput type='number' value={LivePoints} onChange={(e)=>ChangeLivePoints(e.target.value)}/>
+                <PointInput type='number' value={LivePoints} onChange={(e)=>dispatch(changePoint(e.target.value))}/>
                 <EButtons>
                     <EButton onClick={()=>ChangeLivePoints(LivePoints+1)}>
                         <IncrementIcon/>

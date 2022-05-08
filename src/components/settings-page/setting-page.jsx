@@ -65,8 +65,21 @@ export const SettingPage = ({ setPage, page }) => {
   const changePage = () => {
     if(teams.length >= 2)
     {
-      localStorage.setItem('game',JSON.stringify(initialGame))
-      setPage(2);
+      if(initialGame.point.points > 10 && initialGame.point.points < 360){
+        localStorage.setItem('game',JSON.stringify(initialGame))
+        setPage(2);
+    }else {
+        if(initialGame.point.points<11){
+            if(!IsErrorWasPrintedScreen('Minimum Victory Points` 10')){
+                toast.error("Minimum Victory Points` 10")
+            }
+        }else{
+            if(!IsErrorWasPrintedScreen('Maximum Victory Points` 360')){
+                toast.error("Maximum Victory Points` 360")
+            }
+        }
+    }
+     
     }else if(!IsErrorWasPrintedScreen('Add please more 2 teams')){
         toast.error('Add please more 2 teams')
     }
