@@ -1,8 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { TextDrop } from '../global/text-drop';
 import { InvertedButton, SlideContainer, Welcome } from '../../styles/global-components';
 import { StyledStartPage } from '../start-page/start-page';
+import PropTypes from 'prop-types';
 import { AddTeam } from './settings-page-components/AddTeam';
 
 const StyledSettingPage = styled.div`
@@ -14,18 +15,18 @@ const StyledSettingPage = styled.div`
   transform: translate(-50%, -50%);
   background-color: ${({ theme }) => theme.colors.secondColor};
   z-index: 2;
-`
+`;
 const Body = styled(StyledStartPage)` 
   width: 100%;
   max-width: 340px;
-`
+`;
 const MyWelcome = styled(Welcome)` 
   &>span
   {
     letter-spacing: 3px;
     color: ${({ theme }) => theme.colors.secondTextColor};
   }
-`
+`;
 const Buttons = styled.div` 
   display: flex;  
   justify-content: center;  
@@ -34,7 +35,7 @@ const Buttons = styled.div`
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-`
+`;
 const Button = styled(InvertedButton)`
   &:first-child
   {
@@ -49,10 +50,10 @@ const Button = styled(InvertedButton)`
     width: 113px;
     height: 113px;
   }
-`
+`;
 
 export const SettingPage = ({ setPage, page }) => {
-  let className = page > 1 ? "left" : page !== 1 ? "right" : "middle";
+  let className = page > 1 ? 'left' : page !== 1 ? 'right' : 'middle';
 
   return (
     <SlideContainer className={className}>
@@ -69,5 +70,10 @@ export const SettingPage = ({ setPage, page }) => {
         </Body>
       </StyledSettingPage>
     </SlideContainer>
-  )
-}
+  );
+};
+
+SettingPage.propTypes = {
+  setPage: PropTypes.func,
+  page: PropTypes.number
+};

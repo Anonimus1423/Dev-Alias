@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { selectNewTeamName,removeTeamAction } from '../../../store/reducers/team-reducer';
 
 const StyledTeam = styled.div`
@@ -19,9 +20,9 @@ const StyledTeam = styled.div`
     border-radius: 4px;
     background-color: ${({ theme }) => theme.colors.mainColor};
     border-bottom: 4px solid ${({ theme }) => theme.colors.quartersColor};
-`
+`;
 const Buttons = styled.div` 
-`
+`;
 const Button = styled.button`
     padding: 3px 10px;
     border: none;
@@ -40,7 +41,7 @@ const Button = styled.button`
     {
         margin-right: 8px;
     }
-`
+`;
 const Input = styled.input`
     border-radius: 2px;
     border: none;
@@ -53,54 +54,59 @@ const Input = styled.input`
         -webkit-box-shadow: 0px 0px 12px 0px ${({ theme }) => theme.colors.quartersColor}bb; 
         box-shadow: 0px 0px 12px 0px ${({ theme }) => theme.colors.quartersColor}bb;
     }
-`
+`;
 const TeamName = styled.div`
     color: ${({ theme }) => theme.colors.secondTextColor};
-`
+`;
 
 export const Team = ({id,teamName}) => 
 {
-    const [isInputing, setIsInputing] = useState(false);
-    const [renameInput, setRenameInput] = useState(teamName);
-    const input = useRef();
-    const dispatch = useDispatch()
-    useEffect(() => 
+  const [isInputing, setIsInputing] = useState(false);
+  const [renameInput, setRenameInput] = useState(teamName);
+  const input = useRef();
+  const dispatch = useDispatch();
+  useEffect(() => 
+  {
+    console.log(isInputing);
+    if(isInputing === true)
     {
-        console.log(isInputing);
-        if(isInputing === true)
-        {
-            input?.current?.focus();
-        }
-    }, [isInputing])
-    const removeTeam = () => {
-        dispatch(removeTeamAction(id))
+      input?.current?.focus();
     }
-    const selectNewName = e => {
-        e.preventDefault();
-        dispatch(selectNewTeamName(id,renameInput))
-        setIsInputing(false)
-    }
-    return(
-        <StyledTeam>
-            {
-                isInputing 
-                ?
-                    <form>
-                        <Input ref={input} value={renameInput} onChange={e => setRenameInput(e.target.value)} placeholder='Write team name pls'/>
-                        <Buttons>
-                            <Button onClick={e => selectNewName(e)}>Change</Button>
-                            <Button onClick={()=>setIsInputing(false)}>Cancel</Button>
-                        </Buttons>
-                    </form>
-                :
-                   <>
-                        <TeamName>{teamName}</TeamName>
-                        <Buttons>
-                            <Button onClick={()=>removeTeam()}>Delete</Button>
-                            <Button onClick={()=>setIsInputing(true)}>Rename</Button>
-                        </Buttons>
-                   </>
-            }
-        </StyledTeam>
-    )
-}
+  }, [isInputing]);
+  const removeTeam = () => {
+    dispatch(removeTeamAction(id));
+  };
+  const selectNewName = e => {
+    e.preventDefault();
+    dispatch(selectNewTeamName(id,renameInput));
+    setIsInputing(false);
+  };
+  return(
+    <StyledTeam>
+      {
+        isInputing 
+          ?
+          <form>
+            <Input ref={input} value={renameInput} onChange={e => setRenameInput(e.target.value)} placeholder='Write team name pls'/>
+            <Buttons>
+              <Button onClick={e => selectNewName(e)}>Change</Button>
+              <Button onClick={()=>setIsInputing(false)}>Cancel</Button>
+            </Buttons>
+          </form>
+          :
+          <>
+            <TeamName>{teamName}</TeamName>
+            <Buttons>
+              <Button onClick={()=>removeTeam()}>Delete</Button>
+              <Button onClick={()=>setIsInputing(true)}>Rename</Button>
+            </Buttons>
+          </>
+      }
+    </StyledTeam>
+  );
+};
+
+Team.propTypes = {
+  id: PropTypes.number,
+  teamName: PropTypes.string 
+};
