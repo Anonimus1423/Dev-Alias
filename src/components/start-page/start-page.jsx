@@ -10,8 +10,8 @@ export const StyledStartPage = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%); 
-`;
-const GameTitle = styled.h1`
+`
+export const GameTitle = styled.h1`
     font-size: 40px;
     text-align: center;
     font-weight: bold;

@@ -42,32 +42,31 @@ const Top = styled.form`
 
 export const AddTeam = ({ teams }) => 
 {
-  const [teamName, setTeamName] = useState('');
-  const [teamCount, setTeamCount] = useState(1);
-  const dispatch = useDispatch();
-  const addTeam = e =>
-  {
-    e.preventDefault();
-    if(teamName !== '')
+    const [teamName, setTeamName] = useState("");
+    const dispatch = useDispatch();
+
+    const addTeam = e =>
     {
-      dispatch(addTeamAction(teamName));
+        e.preventDefault();
+        if(teamName !== "")
+        {
+            dispatch(addTeamAction(teamName))
+        }
+        else{
+            dispatch(addTeamAction("team " + (teams.length + 1)))
+        }
+        setTeamName("")
     }
-    else{
-      dispatch(addTeamAction('team ' + teamCount));
-      setTeamCount(teamCount + 1);
-    }
-    setTeamName('');
-  };
-  return (
-    <StyledAddTeam>
-      <Top>
-        <Input value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
-        <Button onClick={addTeam}>Add</Button>
-      </Top>
-      <Teams teams={teams}/>
-    </StyledAddTeam>
-  );
-};
+    return (
+        <StyledAddTeam>
+            <Top>
+                <Input  value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
+                <Button onClick={addTeam}>Add</Button>
+            </Top>
+            <Teams teams={teams}/>
+        </StyledAddTeam>
+    )
+}
 AddTeam.propTypes = {
   teams: PropTypes.array
 };

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SlideContainer } from '../../styles/global-components';
 import StartGame from './game-page-components/start-game';
+import Teams from './game-page-components/teams';
 
 const StyledGameContainer = styled.div` 
     width: 100vw;
@@ -23,21 +24,22 @@ export default function GamePage({ page }) {
   const [isGame, setIsGame] = useState(false);
   const teams = useSelector(state => state.teams.teams);
     
-  return (
-    <SlideContainer className={className}>
-      <StyledGameContainer>
-        <StyledGamePage>
-          {
-            isGame
-              ?
-              <GamePage />
-              :
-              <StartGame teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
-          }
-        </StyledGamePage>
-      </StyledGameContainer>
-    </SlideContainer>
-  );
+    return (
+        <SlideContainer className={className}>
+            <StyledGameContainer>
+                <Teams teams={teams} />
+                <StyledGamePage>
+                    {
+                        isGame
+                        ?
+                        <GamePage />
+                        :
+                        <StartGame page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
+                    }
+                </StyledGamePage>
+            </StyledGameContainer>
+        </SlideContainer>
+    )
 }
 GamePage.propTypes = {
   page:PropTypes.number
