@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import styled from 'styled-components';
 import { DecrementIcon, IncrementIcon } from '../../../assets/icons/settings';
 import {changePoint} from '../../../store/reducers/point-reducer'
+import { IsErrorWasPrintedScreen } from '../../../hooks/toastCheck';
 
 const Points = styled.div`
     margin-top: 20px;
@@ -16,7 +17,7 @@ const PoinstTitle = styled.div`
 const PointBlock = styled.div`
     max-width:100%;
     border:1px solid ${({ theme }) => theme.colors.quartersColor }};
-    padding: 10px 5px;
+    padding: 5px;
     display:flex;
     border-radius:3px;
 `
@@ -63,10 +64,18 @@ export const AddPoints = () => {
     const dispatch = useDispatch()
     
     const ChangeLivePoints = (newPoints) => {
-        if(newPoints>0 && newPoints<360){
+        if(newPoints>10 && newPoints<360){
             dispatch(changePoint(newPoints))
         }else {
-            toast.error('Max Victory Points` 360')
+            if(newPoints<11){
+                if(!IsErrorWasPrintedScreen('Minimum Victory Points` 10')){
+                    toast.error("Minimum Victory Points` 10")
+                }
+            }else{
+                if(!IsErrorWasPrintedScreen('Maximum Victory Points` 360')){
+                    toast.error("Maximum Victory Points` 360")
+                }
+            }
         }
     }
 

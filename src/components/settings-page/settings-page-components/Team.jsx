@@ -68,7 +68,6 @@ export const Team = ({id,teamName}) =>
   const dispatch = useDispatch();
   useEffect(() => 
   {
-    console.log(isInputing);
     if(isInputing === true)
     {
       input?.current?.focus();

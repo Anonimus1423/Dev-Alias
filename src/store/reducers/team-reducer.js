@@ -2,7 +2,8 @@
 const IActionTypes = {
   AddTeam: 'AddTeam',
   RemoveTeam: 'RemoveTeam',
-  RenameTeam: 'RenameTeam'
+  RenameTeam: 'RenameTeam',
+  LocalSet: 'LocalSet'
 };
 const defaultState = {
   teams: []
@@ -19,6 +20,8 @@ export default function teamReducer(state = defaultState, action)
       return el.id !== action.payload.teamId;
     });
     return {...state,teams: [...stateTeams]};
+  case IActionTypes.LocalSet:
+    return {...state,...action.payload}
   case IActionTypes.RenameTeam:
     stateTeams[action.payload.teamId].name = action.payload.newName;
     return {...state,teams: [...stateTeams]};
@@ -46,3 +49,12 @@ export const selectNewTeamName = (id,newName) => {
     }
   };
 };
+
+export const localSet = (teams) => {
+  return{
+    type:IActionTypes.LocalSet,
+    payload:{
+      teams
+    }
+  }
+}

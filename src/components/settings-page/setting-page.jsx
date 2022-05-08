@@ -8,6 +8,8 @@ import { AddTeam } from './settings-page-components/AddTeam';
 import { useSelector } from 'react-redux';
 import { AddTime } from './settings-page-components/AddTime';
 import { AddPoints } from './settings-page-components/AddPoints';
+import toast from 'react-hot-toast';
+import { IsErrorWasPrintedScreen } from '../../hooks/toastCheck';
 
 const StyledSettingPage = styled.div`
   position: absolute;
@@ -59,10 +61,14 @@ const Button = styled(InvertedButton)`
 export const SettingPage = ({ setPage, page }) => {
   let className = page > 1 ? 'top' : page !== 1 ? 'right' : 'middle';
   const teams = useSelector(state => state.teams.teams);
+  const initialGame = useSelector(state=>state)
   const changePage = () => {
     if(teams.length >= 2)
     {
+      localStorage.setItem('game',JSON.stringify(initialGame))
       setPage(2);
+    }else if(!IsErrorWasPrintedScreen('Add please more 2 teams')){
+        toast.error('Add please more 2 teams')
     }
   };
   return (

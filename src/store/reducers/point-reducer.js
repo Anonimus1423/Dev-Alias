@@ -4,6 +4,7 @@ export const pointsActions = {
     ChangePoint : 'change-point'
 }
 
+
 const defaultState = {
     points:120
 }

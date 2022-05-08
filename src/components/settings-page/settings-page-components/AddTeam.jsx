@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { addTeamAction } from '../../../store/reducers/team-reducer';
 import { Teams } from './Teams';
+import { IsErrorWasPrintedScreen } from '../../../hooks/toastCheck';
+import toast from 'react-hot-toast';
 
 const StyledAddTeam = styled.div` 
     margin-top: 50px;
@@ -48,14 +50,18 @@ export const AddTeam = ({ teams }) =>
     const addTeam = e =>
     {
         e.preventDefault();
-        if(teamName !== "")
-        {
-            dispatch(addTeamAction(teamName))
+        if(teams.length < 10 ){
+            if(teamName !== "")
+          {
+              dispatch(addTeamAction(teamName))
+          }
+          else{
+              dispatch(addTeamAction("team " + (teams.length + 1)))
+          }
+          setTeamName("")
+        }else if(!IsErrorWasPrintedScreen('Team limit is 10')){
+            toast.error('Team limit is 10')
         }
-        else{
-            dispatch(addTeamAction("team " + (teams.length + 1)))
-        }
-        setTeamName("")
     }
     return (
         <StyledAddTeam>

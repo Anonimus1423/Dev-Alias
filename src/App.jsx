@@ -18,8 +18,8 @@ function App() {
           containerStyle={{}}
           toastOptions={{
             // Define default options
-            className: '',
-            duration: 5000,
+            className: 'toast-body',
+            duration: 3000,
             style: {
               background: '#363636',
               color: '#fff',
