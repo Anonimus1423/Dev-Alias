@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { selectNewTeamName,removeTeamAction } from '../../../store/reducers/team-reducer';
+import { DeleteIcon, RenameIcon, AcceptIcon, DeclineIcon } from '../../../assets/icons/settings';
 
 const StyledTeam = styled.div`
     display: flex;
@@ -89,16 +90,16 @@ export const Team = ({id,teamName}) =>
           <form>
             <Input ref={input} value={renameInput} onChange={e => setRenameInput(e.target.value)} placeholder='Write team name pls'/>
             <Buttons>
-              <Button onClick={e => selectNewName(e)}>Change</Button>
-              <Button onClick={()=>setIsInputing(false)}>Cancel</Button>
+              <Button onClick={e => selectNewName(e)}><AcceptIcon/></Button>
+              <Button onClick={()=>setIsInputing(false)}><DeclineIcon/></Button>
             </Buttons>
           </form>
           :
           <>
             <TeamName>{teamName}</TeamName>
             <Buttons>
-              <Button onClick={()=>removeTeam()}>Delete</Button>
-              <Button onClick={()=>setIsInputing(true)}>Rename</Button>
+              <Button onClick={()=>removeTeam()}><DeleteIcon/></Button>
+              <Button onClick={()=>setIsInputing(true)}><RenameIcon/></Button>
             </Buttons>
           </>
       }
