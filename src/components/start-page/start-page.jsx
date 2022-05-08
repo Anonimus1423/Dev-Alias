@@ -10,7 +10,7 @@ export const StyledStartPage = styled.div`
     top: 50%;
     transform: translate(-50%, -50%); 
 `
-const GameTitle = styled.h1`
+export const GameTitle = styled.h1`
     font-size: 40px;
     text-align: center;
     font-weight: bold;
@@ -26,7 +26,7 @@ export const Button = styled(btn)`
     margin-top: 25px;
 `
 
-export const StartPage = ({ page, setPage  }) => 
+export const StartPage = ({ page, setPage }) => 
 {
     let className = page > 0 ? "left" : page !== 0 ? "right" : "";
     return (

@@ -31,7 +31,7 @@ export default function GamePage({ page }) {
                         ?
                         <GamePage />
                         :
-                        <StartGame teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
+                        <StartGame page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
                     }
                 </StyledGamePage>
             </StyledGameContainer>
