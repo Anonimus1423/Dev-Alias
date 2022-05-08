@@ -22,9 +22,11 @@ const TimerBlock = styled.div`
     display:flex;
     border-radius:3px;
     align-items:center;
+    transition: 0.3s;
     justify-content:center;
     &:hover{
-        background-color:${props => props.selected ?  ({ theme }) => theme.colors.quartersColor : 'inherit'};
+        background-color: ${props => props.selected ? 'inherit' :  ({ theme }) => theme.colors.quartersColor };
+        color: ${props => props.selected ?  ({ theme }) => theme.colors.quartersColor  :   ({ theme }) => theme.colors.secondColor};
     }
 `
 const TimerTitle = styled.div`
