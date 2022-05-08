@@ -5,6 +5,7 @@ import { InvertedButton, SlideContainer, Welcome } from '../../styles/global-com
 import { StyledStartPage } from '../start-page/start-page';
 import PropTypes from 'prop-types';
 import { AddTeam } from './settings-page-components/AddTeam';
+import { useSelector } from 'react-redux';
 
 const StyledSettingPage = styled.div`
   position: absolute;
@@ -53,8 +54,14 @@ const Button = styled(InvertedButton)`
 `;
 
 export const SettingPage = ({ setPage, page }) => {
-  let className = page > 1 ? 'left' : page !== 1 ? 'right' : 'middle';
-
+  let className = page > 1 ? 'top' : page !== 1 ? 'right' : 'middle';
+  const teams = useSelector(state => state.teams.teams);
+  const changePage = () => {
+    if(teams.length >= 2)
+    {
+      setPage(2);
+    }
+  };
   return (
     <SlideContainer className={className}>
       <StyledSettingPage>
@@ -62,9 +69,9 @@ export const SettingPage = ({ setPage, page }) => {
           <MyWelcome>
             <TextDrop start={page === 1} string='Settings' delay={0.1} startDelay={0} />
           </MyWelcome>
-          <AddTeam />
+          <AddTeam teams={teams} />
           <Buttons>
-            <Button>Start Alias</Button>
+            <Button onClick={changePage}>Start Alias</Button>
             <Button onClick={() => setPage(0)}>Go Back</Button>
           </Buttons>
         </Body>

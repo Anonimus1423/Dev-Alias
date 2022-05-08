@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { addTeamAction } from '../../../store/reducers/team-reducer';
 import { Teams } from './Teams';
 
 const StyledAddTeam = styled.div` 
-    margin-top: 40px;
+    margin-top: 50px;
 `;
 const Input = styled.input`
     display: block;
@@ -39,7 +40,7 @@ const Top = styled.form`
     align-items: stretch;
 `;
 
-export const AddTeam = () => 
+export const AddTeam = ({ teams }) => 
 {
   const [teamName, setTeamName] = useState('');
   const dispatch = useDispatch();
@@ -50,16 +51,17 @@ export const AddTeam = () =>
     {
       dispatch(addTeamAction(teamName));
     }
-    setTeamName('');
   };
-  
   return (
     <StyledAddTeam>
       <Top>
         <Input value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
         <Button onClick={addTeam}>Add</Button>
       </Top>
-      <Teams/>
+      <Teams teams={teams}/>
     </StyledAddTeam>
   );
+};
+AddTeam.propTypes = {
+  teams: PropTypes.object
 };

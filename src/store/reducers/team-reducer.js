@@ -13,7 +13,7 @@ export default function teamReducer(state = defaultState, action)
   switch(action.type)
   {
   case IActionTypes.AddTeam:
-    return {...state, teams: [...state.teams, { id: state.teams.length, name: action.payload.teamName }]};
+    return {...state, teams: [...state.teams, { id: state.teams.length, name: action.payload.teamName, score: 0 }]};
   case IActionTypes.RemoveTeam:
     stateTeams = stateTeams.filter(el=>{
       return el.id !== action.payload.teamId;

@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
 import React from 'react';
 import styled from 'styled-components';
 import { Team } from './Team';
+import PropTypes from 'prop-types';
 
 const StyledTeams = styled.div` 
     margin-top: 25px;
@@ -29,8 +29,7 @@ const None = styled.p`
     }
 `;
 
-export const Teams = () => {
-  const teams = useSelector(state => state.teams.teams);
+export const Teams = ({ teams }) => {
   return(
     <StyledTeams>
       {
@@ -46,4 +45,7 @@ export const Teams = () => {
       }
     </StyledTeams>
   );
+};
+Teams.propTypes = {
+  teams: PropTypes.object
 };
