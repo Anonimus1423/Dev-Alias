@@ -23,6 +23,9 @@ const TimerBlock = styled.div`
     border-radius:3px;
     align-items:center;
     justify-content:center;
+    &:hover{
+        background-color:${props => props.selected ?  ({ theme }) => theme.colors.quartersColor : 'inherit'};
+    }
 `
 const TimerTitle = styled.div`
     color: ${({theme})=>theme.colors.quartersColor};
