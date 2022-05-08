@@ -21,8 +21,8 @@ const StyledIcons = styled.div`
 export default function Icons({ setPage }) {
     return (
         <StyledIcons>
-            <SettingIcon onclick={() => setPage(2)} />
-            <DeclineIcon onclick={() => setPage(0)} width={25} height={25} />
+            <SettingIcon onClick={() => setPage(2)} />
+            <DeclineIcon onClick={() => setPage(0)} width={25} height={25} />
         </StyledIcons>
     )
 }

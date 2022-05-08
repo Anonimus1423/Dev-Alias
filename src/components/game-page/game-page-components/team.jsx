@@ -9,6 +9,8 @@ const StyledTeam = styled.div`
     margin-top: 10px;
     width: 150px;
     border-radius: 4px;
+    position: relative;
+    z-index: -1;
     border-bottom: 3px solid ${({ theme }) => theme.colors.secondColor};
     &:first-child
     {
