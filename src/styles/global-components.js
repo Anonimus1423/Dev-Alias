@@ -81,7 +81,16 @@ export const TopWhite = styled.div`
 `;
 export const Welcome = styled.h2` 
     text-align: center;
+    white-space: nowrap;
     font-size: 52px;
+    @media(max-width: 490px)
+    {
+        font-size: 40px;
+    }
+    @media(max-width: 400px)
+    {
+        font-size: 32px;
+    }
     &>span
     {
         transition: 0.3s;

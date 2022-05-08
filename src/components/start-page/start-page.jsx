@@ -15,12 +15,21 @@ export const GameTitle = styled.h1`
     font-size: 40px;
     text-align: center;
     font-weight: bold;
+    white-space: nowrap;
     &>span
     {
         transform: scaleY(1) translateY(-300px) scaleX(1);
         display: inline-block;
         animation: ${goBottom} 1s linear forwards;
         color: ${({ theme }) => theme.colors.thirdTextColor};
+    }
+    @media(max-width: 490px)
+    {
+        font-size: 35px;
+    }
+    @media(max-width: 400px)
+    {
+        font-size: 30px;
     }
 `;
 export const Button = styled(btn)`

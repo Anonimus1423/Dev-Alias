@@ -22,6 +22,7 @@ const StyledSettingPage = styled.div`
 const Body = styled(StyledStartPage)` 
   width: 100%;
   max-width: 340px;
+  padding: 0px 10px;
 `;
 const MyWelcome = styled(Welcome)` 
   &>span

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, goBottom } from '../../../styles/global-components'
 import { GameTitle } from '../../start-page/start-page'
 import { TextDrop } from '../../global/text-drop'
+import { useSelector } from 'react-redux';
 
 const StyledStartGame = styled.div`
 `
@@ -15,6 +16,11 @@ const Top = styled.div`
     margin-top: 15px;
     min-width: 330px;
     padding: 2px;
+    @media(max-width: 450px)
+    {
+        width: 280px;
+        min-width: 0;
+    }
 `
 const TeamName = styled.h2`
     text-align: center;
@@ -32,7 +38,7 @@ const MyButton = styled(Button)`
 const MyGameTitle = styled(GameTitle)` 
     &>span
     {
-        animation: none;
+        animation: none;    
         &.start
         {
             animation: ${goBottom} 1s linear forwards;

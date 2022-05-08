@@ -15,7 +15,7 @@ export const Router = () =>
     <StyledRouter>
       <StartPage setPage={setPage} page={page} />
       <SettingPage setPage={setPage} page={page} />
-      <GamePage page={page} />
+      <GamePage page={page} setPage={setPage}/>
     </StyledRouter>
   );
 };
