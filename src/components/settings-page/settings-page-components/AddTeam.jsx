@@ -41,7 +41,8 @@ const Top = styled.form`
 
 export const AddTeam = ({ teams }) => 
 {
-    const [teamName, setTeamName] = useState("")
+    const [teamName, setTeamName] = useState("");
+    const [teamCount, setTeamCount] = useState(1);
     const [isInputing,setIsInputing] = useState(false)
     const dispatch = useDispatch();
     const addTeam = e =>
@@ -50,6 +51,10 @@ export const AddTeam = ({ teams }) =>
         if(teamName !== "")
         {
             dispatch(addTeamAction(teamName))
+        }
+        else{
+            dispatch(addTeamAction("team " + teamCount))
+            setTeamCount(teamCount + 1);
         }
         setTeamName("")
     }

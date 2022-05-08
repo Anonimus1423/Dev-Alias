@@ -5,7 +5,7 @@ const StyledStartGame = styled.div`
 `
 const Title = styled.h2`
     text-align: center;
-    font-size: 52px;
+    font-size: 58px;
     font-weight: bold;
     padding: 0px 15px; 
     border-bottom: 2px solid ${({ theme }) => theme.colors.mainColor};
