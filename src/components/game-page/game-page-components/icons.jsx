@@ -1,10 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+<<<<<<< Updated upstream
 import { DeclineIcon, DeleteIcon, SettingIcon } from '../../../assets/icons/settings'
 import { changePoint } from '../../../store/reducers/point-reducer'
 import { localSet } from '../../../store/reducers/team-reducer'
 import { changeTime } from '../../../store/reducers/time-reducer'
+=======
+import { DeclineIcon, SettingIcon } from '../../../assets/icons/settings'
+>>>>>>> Stashed changes
 
 const StyledIcons = styled.div` 
     display: flex;
@@ -33,8 +37,13 @@ export default function Icons({ setPage }) {
     }
     return (
         <StyledIcons>
+<<<<<<< Updated upstream
             <SettingIcon onClick={() => setPage(2)} />
             <DeclineIcon onClick={() => closeAndDeleteLocal()} width={25} height={25} />
+=======
+            <SettingIcon onClick={() => setPage(1)} />
+            <DeclineIcon onClick={() => setPage(0)} width={25} height={25} />
+>>>>>>> Stashed changes
         </StyledIcons>
     )
 }

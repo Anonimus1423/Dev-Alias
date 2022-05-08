@@ -25,6 +25,20 @@ const Body = styled(StyledStartPage)`
   width: 100%;
   max-width: 340px;
   padding: 0px 10px;
+  max-height: 95vh;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: thin;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: darkgrey;
+  }
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
 `;
 const MyWelcome = styled(Welcome)` 
   &>span

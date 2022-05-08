@@ -20,7 +20,7 @@ const StyledTeams = styled.div`
         }
     }
 `
-const Gradient = styled.div` 
+export const Gradient = styled.div` 
     position: absolute;
     left: 50%;
     top: 100%;
@@ -29,10 +29,16 @@ const Gradient = styled.div`
     width: 100%;
     width: 150px;
     max-height: 150px;
+    display: none;
     height: 100%;
     background: rgb(255,0,254);
-    background: linear-gradient(180deg, rgba(255,0,254,0) 82%, rgba(0,0,0,0.5662640056022409) 100%, rgba(0,0,0,0.57) 100%);
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(255,0,254,0) 70%, rgba(0,0,0,0.6) 100%, rgba(0,0,0,0.6) 100%);
     transform: translateX(-50%) translateY(-100%) translateY(-15%);
+    &.active
+    {
+        display: block;
+    }
     @media(min-width: 725px)
     {
         display: none;
@@ -43,7 +49,7 @@ export default function Teams({ teams })
     const sortedTeam = teams.sort((a, b) => b.score - a.score)
     return (
         <div>
-            <Gradient />
+            <Gradient className={teams.length > 3 ? "active" : ""} />
             <StyledTeams>
                 { sortedTeam.map((team, i) => <Team key={v4()} team={team} />)}
             </StyledTeams>
