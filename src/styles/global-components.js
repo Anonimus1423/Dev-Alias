@@ -84,6 +84,7 @@ export const Welcome = styled.h2`
     font-size: 52px;
     &>span
     {
+        transition: 0.3s;
         transform: scaleY(1) translateY(-300px) scaleX(1);
         display: inline-block;
         &.start
@@ -98,6 +99,7 @@ export const SlideContainer = styled.div`
     height: 100vh;
     width: 100%;
     left: 50%;
+    top: 0%;
     transform: translateX(-50%);
     &.left
     {
@@ -108,6 +110,16 @@ export const SlideContainer = styled.div`
     {
         left: 100%;
         transform: translateX(0%);
+    }
+    &.top
+    {
+        top: -1%;
+        transform: translateY(-100%) translateX(-50%);
+    }
+    &.bottom
+    {
+        top: 100%;
+        transform: translateY(0%) translateX(-50%);
     }
     &.middle
     {

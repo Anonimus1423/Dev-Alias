@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import { Team } from "./Team";
@@ -29,8 +28,7 @@ const None = styled.p`
     }
 `
 
-export const Teams = () => {
-    const teams = useSelector(state => state.teams.teams);
+export const Teams = ({ teams }) => {
     return(
         <StyledTeams>
             {

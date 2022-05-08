@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addTeamAction,removeTeamAction } from '../../../store/reducers/team-reducer';
+import { addTeamAction } from '../../../store/reducers/team-reducer';
 import { Teams } from './Teams';
 
 const StyledAddTeam = styled.div` 
-    margin-top: 40px;
+    margin-top: 50px;
 `
 const Input = styled.input`
     display: block;
@@ -39,7 +39,7 @@ const Top = styled.form`
     align-items: stretch;
 `
 
-export const AddTeam = () => 
+export const AddTeam = ({ teams }) => 
 {
     const [teamName, setTeamName] = useState("")
     const [isInputing,setIsInputing] = useState(false)
@@ -53,14 +53,13 @@ export const AddTeam = () =>
         }
         setTeamName("")
     }
-  
     return (
         <StyledAddTeam>
             <Top>
                 <Input  value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
                 <Button onClick={addTeam}>Add</Button>
             </Top>
-            <Teams/>
+            <Teams teams={teams}/>
         </StyledAddTeam>
     )
 }
