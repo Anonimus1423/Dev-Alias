@@ -1,13 +1,6 @@
 import React from 'react'
 
-interface ITextDropProps
-{
-    string: string;
-    startDelay: number;
-    delay: number;
-    start: boolean;
-}
-export const TextDrop: React.FC<ITextDropProps> = ({string, delay, startDelay, start}) => 
+export const TextDrop = ({string, delay, startDelay, start}) => 
 {
     return (
         <>

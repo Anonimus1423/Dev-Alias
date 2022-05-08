@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
 import styled from 'styled-components';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { addTeamAction,removeTeamAction } from '../../../store/reducers/team-reducer';
 import { Teams } from './Teams';
 
@@ -34,23 +32,21 @@ const Button = styled.button`
     margin-left: 20px;
     padding: 0px 20px;
 `
-const Top = styled.div` 
+const Top = styled.form` 
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
 `
 
-
-export const AddTeam: React.FC = () => 
+export const AddTeam = () => 
 {
-    const [teamName, setTeamName] = useState<string>("")
-    const teams = useTypedSelector(state => state.teams.teams);
-    const input = useRef<HTMLInputElement>();
+    const [teamName, setTeamName] = useState("")
     const [isInputing,setIsInputing] = useState(false)
-    const dispatch: Dispatch = useDispatch();
-    const addTeam = () =>
+    const dispatch = useDispatch();
+    const addTeam = e =>
     {
+        e.preventDefault();
         if(teamName !== "")
         {
             dispatch(addTeamAction(teamName))
@@ -60,11 +56,11 @@ export const AddTeam: React.FC = () =>
   
     return (
         <StyledAddTeam>
-            <Teams/>
             <Top>
                 <Input  value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
                 <Button onClick={addTeam}>Add</Button>
             </Top>
+            <Teams/>
         </StyledAddTeam>
     )
 }

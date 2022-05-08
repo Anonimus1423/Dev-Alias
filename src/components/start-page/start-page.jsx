@@ -2,7 +2,6 @@ import React from 'react'
 import styled from "styled-components";
 import { Button as btn } from '../../styles/global-components';
 import { TextDrop } from '../global/text-drop';
-import { IPages } from '../../types/pages-type';
 import { Welcome, TopWhite, goBottom, SlideContainer } from '../../styles/global-components';
 
 export const StyledStartPage = styled.div`
@@ -27,9 +26,9 @@ export const Button = styled(btn)`
     margin-top: 25px;
 `
 
-export const StartPage: React.FC<IPages> = ({ page, setPage  }) => 
+export const StartPage = ({ page, setPage  }) => 
 {
-    let className: string = page > 0 ? "left" : page !== 0 ? "right" : "";
+    let className = page > 0 ? "left" : page !== 0 ? "right" : "";
     return (
         <SlideContainer className={className}>
             <TopWhite />

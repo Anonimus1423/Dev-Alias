@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IPages } from '../../types/pages-type';
 import { TextDrop } from '../global/text-drop';
 import { InvertedButton, SlideContainer, Welcome } from '../../styles/global-components';
 import { StyledStartPage } from '../start-page/start-page';
@@ -31,7 +30,7 @@ const Buttons = styled.div`
   display: flex;  
   justify-content: center;  
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -52,8 +51,8 @@ const Button = styled(InvertedButton)`
   }
 `
 
-export const SettingPage: React.FC<IPages> = ({ setPage, page }) => {
-  let className: string = page > 1 ? "left" : page !== 1 ? "right" : "middle";
+export const SettingPage = ({ setPage, page }) => {
+  let className = page > 1 ? "left" : page !== 1 ? "right" : "middle";
 
   return (
     <SlideContainer className={className}>

@@ -7,13 +7,13 @@ const StyledRouter = styled.div`
     
 `
 
-export const Router: React.FC = () => 
+export const Router = () => 
 {
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState(0)
   return (
     <StyledRouter>
-        <StartPage setPage={setPage} page={page} />
-        <SettingPage setPage={setPage} page={page} />
+      <StartPage setPage={setPage} page={page} />
+      <SettingPage setPage={setPage} page={page} />
     </StyledRouter>
   )
 }

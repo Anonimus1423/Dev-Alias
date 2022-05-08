@@ -1,6 +1,4 @@
-import { ITheme } from "../types/theme-types";
-
-export const theme: ITheme = {
+export const theme = {
     colors: {
         backgroundColor: "#EEEEEE",
         mainColor: "#00ADB5",

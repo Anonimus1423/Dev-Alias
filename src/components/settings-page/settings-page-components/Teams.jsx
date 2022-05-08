@@ -3,29 +3,47 @@ import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import { Team } from "./Team";
 
-const TeamsBlock = styled.div`
-    display:flex;
-    width:100%;
-    flex-direction:column;
-    margin-bottom:12px;
-    gap:12px;
+const StyledTeams = styled.div` 
+    margin-top: 25px;
 `
-const TeamBlock = styled.div`
-    width:100%;
-    padding: 5px 10px;
-    border:1px solid ${({ theme }) => theme.colors.quartersColor};
-`
-const TeamName = styled.div`
-    
+const None = styled.p`
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: ${({ theme }) => theme.colors.secondTextColor};
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    &::before
+    {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, 150%);
+        height: 2px;
+        width: 100%;
+        background-color: ${({ theme }) => theme.colors.quartersColor};
+    }
 `
 
 export const Teams = () => {
-    const teams =   useSelector(state=>state.teams.teams);
+    const teams = useSelector(state => state.teams.teams);
     return(
-        teams.map((e)=>{
-            return(
-                <Team id={e.id} teamName={ e.name }/>
-            )
-        })
+        <StyledTeams>
+            {
+                teams.length 
+                ?
+                teams.map((e, i)=>{
+                    return(
+                        <Team key={i} id={e.id} teamName={ e.name }/>
+                    )
+                })
+                :
+                <None>Add minimum 2 teams</None>
+            }
+        </StyledTeams>
     )
 }

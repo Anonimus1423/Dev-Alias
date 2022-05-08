@@ -1,8 +1,13 @@
-import { teamState, ActionTypes, IActionTypes } from '../../types/team-reducer-types';
-const defaultState: teamState = {
+
+const IActionTypes = {
+    AddTeam: "AddTeam",
+    RemoveTeam: "RemoveTeam",
+    RenameTeam: "RenameTeam"
+}
+const defaultState = {
     teams: []
 }
-export default function teamReducer(state = defaultState, action: ActionTypes) : teamState
+export default function teamReducer(state = defaultState, action)
 {
     switch(action.type)
     {
@@ -11,7 +16,6 @@ export default function teamReducer(state = defaultState, action: ActionTypes) :
         case IActionTypes.RemoveTeam:
             let stateTeams = [...state.teams]
             stateTeams = stateTeams.filter(el=>{
-                console.log(el.id !== action.payload.teamId)
                 return el.id !== action.payload.teamId
             })
             return {...state,teams: [...stateTeams]}
@@ -23,11 +27,11 @@ export default function teamReducer(state = defaultState, action: ActionTypes) :
             return state;
     }
 }
-export const addTeamAction = (teamName: string) => ({ type: IActionTypes.AddTeam, payload: { teamName } })
+export const addTeamAction = (teamName) => ({ type: IActionTypes.AddTeam, payload: { teamName } })
 
-export const removeTeamAction = (teamId:string) => {
+export const removeTeamAction = (teamId) => {
     return{
-        type:IActionTypes.RemoveTeam,
+        type: IActionTypes.RemoveTeam,
         payload:{
             teamId
         }
