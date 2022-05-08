@@ -1,6 +1,10 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { DeclineIcon, DeleteIcon, SettingIcon } from '../../../assets/icons/settings'
+import { changePoint } from '../../../store/reducers/point-reducer'
+import { localSet } from '../../../store/reducers/team-reducer'
+import { changeTime } from '../../../store/reducers/time-reducer'
 
 const StyledIcons = styled.div` 
     display: flex;
@@ -19,10 +23,18 @@ const StyledIcons = styled.div`
 `
 
 export default function Icons({ setPage }) {
+    const dispatch = useDispatch()
+    const closeAndDeleteLocal = () => {
+        dispatch(localSet([]))
+        dispatch(changePoint(120))
+        dispatch(changeTime(60))
+        setPage(1)
+        localStorage.removeItem('game')
+    }
     return (
         <StyledIcons>
             <SettingIcon onClick={() => setPage(2)} />
-            <DeclineIcon onClick={() => setPage(0)} width={25} height={25} />
+            <DeclineIcon onClick={() => closeAndDeleteLocal()} width={25} height={25} />
         </StyledIcons>
     )
 }
