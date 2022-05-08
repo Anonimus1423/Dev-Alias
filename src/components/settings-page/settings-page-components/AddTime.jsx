@@ -9,7 +9,6 @@ const TimersBlock = styled.div`
     width:100%;
     display:flex;
     justify-content: space-between;
-    margin-top: 20px;
     flex-wrap:wrap;
 `
 
@@ -25,7 +24,14 @@ const TimerBlock = styled.div`
     align-items:center;
     justify-content:center;
 `
-
+const TimerTitle = styled.div`
+    color: ${({theme})=>theme.colors.quartersColor};
+    font-size:14px;
+    margin: 10px 0px;
+`
+const Timer = styled.div`
+    margin-top:20px;
+`
 const times = [30,60,90,120]
 
 export const AddTime = () => {
@@ -37,10 +43,15 @@ export const AddTime = () => {
     }
 
     return(
-        <TimersBlock>
-            {times.map( ( e )=>{
-                return <TimerBlock selected={e === Time} key={uuidv4()} onClick={()=>selectTime(e)}>{e}</TimerBlock>
-            }) }
-        </TimersBlock>
+       <Timer>
+           <TimerTitle>
+               ROUND TIME
+           </TimerTitle>
+            <TimersBlock>
+                {times.map( ( e )=>{
+                    return <TimerBlock selected={e === Time} key={uuidv4()} onClick={()=>selectTime(e)}>{e}</TimerBlock>
+                }) }
+            </TimersBlock>
+       </Timer>
     );
 };

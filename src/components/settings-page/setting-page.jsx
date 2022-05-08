@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { AddTeam } from './settings-page-components/AddTeam';
 import { useSelector } from 'react-redux';
 import { AddTime } from './settings-page-components/AddTime';
+import { AddPoints } from './settings-page-components/AddPoints';
 
 const StyledSettingPage = styled.div`
   position: absolute;
@@ -72,6 +73,7 @@ export const SettingPage = ({ setPage, page }) => {
           </MyWelcome>
           <AddTeam teams={teams} />
           <AddTime/>
+          <AddPoints/>
           <Buttons>
             <Button onClick={changePage}>Start Alias</Button>
             <Button onClick={() => setPage(0)}>Go Back</Button>
