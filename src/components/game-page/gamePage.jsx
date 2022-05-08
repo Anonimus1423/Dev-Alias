@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SlideContainer } from '../../styles/global-components';
 import StartGame from './game-page-components/start-game';
+import Teams from './game-page-components/teams';
 
 const StyledGameContainer = styled.div` 
     width: 100vw;
@@ -25,6 +26,7 @@ export default function GamePage({ page }) {
     return (
         <SlideContainer className={className}>
             <StyledGameContainer>
+                <Teams teams={teams} />
                 <StyledGamePage>
                     {
                         isGame
