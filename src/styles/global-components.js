@@ -1,4 +1,4 @@
-import styled, {keyframes} from "styled-components";
+import styled, {keyframes} from 'styled-components';
 
 export const goBottom = keyframes`
     0%
@@ -17,7 +17,7 @@ export const goBottom = keyframes`
     {
         transform: scaleY(1) scaleX(1) translateY(0px);
     }
-`
+`;
 export const Button = styled.button` 
     font-size: 18px;
     background-color: transparent;
@@ -56,7 +56,7 @@ export const Button = styled.button`
         width: 110px;
         height: 110px;
     }
-`
+`;
 export const InvertedButton = styled(Button)`
     border: 1px solid ${({ theme }) => theme.colors.quartersColor};
     color: ${({ theme }) => theme.colors.secondTextColor};
@@ -69,7 +69,7 @@ export const InvertedButton = styled(Button)`
     {
         color: ${({ theme }) => theme.colors.defaultTextColor}
     }
-`
+`;
 export const TopWhite = styled.div`
     width: 100%;
     height: 20.1%;
@@ -78,7 +78,7 @@ export const TopWhite = styled.div`
     left: 0;
     top: 0;
     z-index: 2;
-`
+`;
 export const Welcome = styled.h2` 
     text-align: center;
     font-size: 52px;
@@ -92,7 +92,7 @@ export const Welcome = styled.h2`
             animation: ${goBottom} 1s linear forwards;
         }
     }
-`
+`;
 export const SlideContainer = styled.div` 
     transition: 0.5s;
     position: absolute;
@@ -126,4 +126,4 @@ export const SlideContainer = styled.div`
         left: 50%;
         transform: translateX(-50%);
     }
-`   
+`;   

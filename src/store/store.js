@@ -1,8 +1,10 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore } from 'redux';
 import teamReducer from './reducers/team-reducer';
+import timeReducer from './reducers/time-reducer';
 
 const rootReducer = combineReducers({
-    teams: teamReducer
-})
+  teams: teamReducer,
+  time: timeReducer
+});
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer);

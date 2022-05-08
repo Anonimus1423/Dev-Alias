@@ -44,7 +44,6 @@ export const AddTeam = ({ teams }) =>
 {
   const [teamName, setTeamName] = useState('');
   const [teamCount, setTeamCount] = useState(1);
-  const [isInputing,setIsInputing] = useState(false);
   const dispatch = useDispatch();
   const addTeam = e =>
   {
@@ -70,5 +69,5 @@ export const AddTeam = ({ teams }) =>
   );
 };
 AddTeam.propTypes = {
-  teams: PropTypes.object
+  teams: PropTypes.array
 };

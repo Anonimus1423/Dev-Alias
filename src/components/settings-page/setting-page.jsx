@@ -6,6 +6,7 @@ import { StyledStartPage } from '../start-page/start-page';
 import PropTypes from 'prop-types';
 import { AddTeam } from './settings-page-components/AddTeam';
 import { useSelector } from 'react-redux';
+import { AddTime } from './settings-page-components/AddTime';
 
 const StyledSettingPage = styled.div`
   position: absolute;
@@ -70,6 +71,7 @@ export const SettingPage = ({ setPage, page }) => {
             <TextDrop start={page === 1} string='Settings' delay={0.1} startDelay={0} />
           </MyWelcome>
           <AddTeam teams={teams} />
+          <AddTime/>
           <Buttons>
             <Button onClick={changePage}>Start Alias</Button>
             <Button onClick={() => setPage(0)}>Go Back</Button>

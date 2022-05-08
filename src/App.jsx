@@ -4,7 +4,8 @@ import { Router } from './components/Router';
 
 const StyledApp = styled.div`
   
-`
+`;
+
 function App() {
   return (
     <StyledApp>

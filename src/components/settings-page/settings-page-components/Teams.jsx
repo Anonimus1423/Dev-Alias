@@ -47,5 +47,5 @@ export const Teams = ({ teams }) => {
   );
 };
 Teams.propTypes = {
-  teams: PropTypes.object
+  teams: PropTypes.array
 };

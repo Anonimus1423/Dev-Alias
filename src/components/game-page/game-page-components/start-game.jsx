@@ -29,5 +29,5 @@ export default function StartGame({ setIsGame, teamOrder, teams })
 StartGame.propTypes = {
   setIsGame: PropTypes.func,
   teamOrder: PropTypes.number,
-  teams: PropTypes.object
+  teams: PropTypes.array
 };
