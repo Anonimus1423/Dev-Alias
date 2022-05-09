@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { setActiveIndex } from '../store/reducers/active-index';
 import { changePoint } from '../store/reducers/point-reducer';
 import { localSet } from '../store/reducers/team-reducer';
 import { changeTime } from '../store/reducers/time-reducer';
@@ -18,10 +19,12 @@ export const Router = () =>
   const dispatch = useDispatch()
   useEffect(()=>{
     let PrevGame = JSON.parse(localStorage.getItem('game')) || {teams:[]}
-    if(PrevGame.teams.length){
+    console.log(PrevGame)
+    if(PrevGame.teams.teams.length){
       dispatch(localSet(PrevGame.teams.teams))
       dispatch(changePoint(PrevGame.point.points))
       dispatch(changeTime(PrevGame.time.time))
+      dispatch(setActiveIndex(PrevGame.index))
       setPage(2)
     }
   },[])

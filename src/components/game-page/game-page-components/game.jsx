@@ -36,7 +36,7 @@ export const Game = ({ isGame,setIsGame }) => {
   const className = !isGame ? "back" : "forward";
   return (
     <StyledGame className={className}>
-      {isGame ? <TeamTitle>{team.name}</TeamTitle> : ''}
+      {isGame ? <TeamTitle>{team.name || ''}</TeamTitle> : ''}
       {isGame ? <Alias/> : ''}
       <Timer isGame={isGame} setIsGame={setIsGame}/>
     </StyledGame>

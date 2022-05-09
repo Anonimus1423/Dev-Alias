@@ -21,6 +21,7 @@ export const Timer = ({isGame,setIsGame}) => {
     const teams = useSelector(state=>state.teams.teams)
     const thisActiveIndex = useSelector(state=>state.index)
     const dispatch = useDispatch()
+    const initialGame = useSelector(state => state)
     const [selectedMaxTime,setSelectedMaxTime] = useState(useSelector(state=>state.time.time))
     useEffect(()=>{
         if(selectedTime !== selectedMaxTime){
@@ -32,17 +33,20 @@ export const Timer = ({isGame,setIsGame}) => {
           const timer = setInterval(()=>{
             if(selectedMaxTime === 1){
                 if(thisActiveIndex === teams.length - 1){
+                    initialGame.index = 0
                     dispatch(setActiveIndex(0))
                 }else{
+                    initialGame.index = thisActiveIndex + 1
                     dispatch(setActiveIndex(thisActiveIndex + 1))
                 }
                   setIsGame(false)
                   toast.success('yow ')
                   setSelectedMaxTime(selectedTime)
+                  localStorage.setItem('game',JSON.stringify(initialGame))
             }else{
               setSelectedMaxTime(selectedMaxTime-1)
             }
-          },800)
+          },200)
           return () => clearInterval(timer);
         }
     },[selectedMaxTime,isGame])

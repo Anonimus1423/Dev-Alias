@@ -10,6 +10,7 @@ const StyledStartGame = styled.div`
     transition: 0.4s;
     transform: scale(1);
     opacity: 1;
+    z-index: -1000;
     position: absolute;
     left: 50%;
     top: 50%;

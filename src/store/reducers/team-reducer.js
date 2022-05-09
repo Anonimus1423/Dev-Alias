@@ -4,7 +4,9 @@ const IActionTypes = {
   AddTeam: 'AddTeam',
   RemoveTeam: 'RemoveTeam',
   RenameTeam: 'RenameTeam',
-  LocalSet: 'LocalSet'
+  LocalSet: 'LocalSet',
+  AddPoint: 'add-point',
+  DeletePoint: 'delete-point'
 };
 const defaultState = {
   teams: []
@@ -25,6 +27,12 @@ export default function teamReducer(state = defaultState, action)
     return {...state,...action.payload}
   case IActionTypes.RenameTeam:
     stateTeams[action.payload.teamId].name = action.payload.newName;
+    return {...state,teams: [...stateTeams]};
+  case IActionTypes.AddPoint:
+    stateTeams[action.payload.index].score += 1
+    return {...state,teams: [...stateTeams]};
+  case IActionTypes.DeletePoint:
+    stateTeams[action.payload.index].score -= 1
     return {...state,teams: [...stateTeams]};
   default:
     return state;
@@ -56,6 +64,24 @@ export const localSet = (teams) => {
     type:IActionTypes.LocalSet,
     payload:{
       teams
+    }
+  }
+}
+
+export const AddPointer = (index) => {
+  return{
+    type:IActionTypes.AddPoint,
+    payload:{
+      index
+    }
+  }
+}
+
+export const DeletePointer = (index) => {
+  return{
+    type:IActionTypes.DeletePoint,
+    payload:{
+      index
     }
   }
 }
