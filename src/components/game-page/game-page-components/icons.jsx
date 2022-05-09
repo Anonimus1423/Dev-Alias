@@ -30,6 +30,7 @@ export default function Icons({ setPage }) {
         dispatch(changeTime(60))
         setPage(0)
         localStorage.removeItem('game')
+        localStorage.removeItem('index')
     }
     return (
         <StyledIcons>

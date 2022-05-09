@@ -44,7 +44,7 @@ const QuestTitle = styled.div`
     padding: 10px 5px;
     opacity: ${props => props.isSelected ? "0.7" : "1"};
 `
-export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex}) => {
+export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex,setWonScore}) => {
     const aliasis = useSelector(state=>state.quests)
     const [answeredQuests,setAnsweredQuests] = useState([])
     const dispatch = useDispatch() 
@@ -64,6 +64,7 @@ export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex}) => {
         if(answeredQuests.indexOf(e) === -1){
             setAnsweredQuests([...answeredQuests,e])
             dispatch(AddPointer(thisActiveIndex))
+            setWonScore(prev => prev + 1)
             if(answeredQuests.length === 4){
                 setAnsweredQuests([])
                 newQuests()

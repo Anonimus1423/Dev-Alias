@@ -16,7 +16,7 @@ const TimerText = styled.div`
     color: ${({theme}) => theme.colors.querySelector}    
 `
 
-export const Timer = ({isGame,setIsGame,setCurrentStartIndex,currentStartIndex}) => {
+export const Timer = ({isGame,setIsGame,setCurrentStartIndex,wonScore,setWonScore,currentStartIndex}) => {
     let selectedTime = useSelector(state=>state.time.time);
     const teams = useSelector(state=>state.teams.teams)
     const thisActiveIndex = useSelector(state=>state.index)
@@ -41,7 +41,8 @@ export const Timer = ({isGame,setIsGame,setCurrentStartIndex,currentStartIndex})
                 }
                   setIsGame(false)
                   setCurrentStartIndex(currentStartIndex + 5)
-                  toast.success('yow')
+                  toast.success(`Won ${wonScore}`)
+                  setWonScore(0)
                   setSelectedMaxTime(selectedTime)
                   localStorage.setItem('game',JSON.stringify(initialGame))
             }else{
