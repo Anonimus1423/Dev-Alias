@@ -26,10 +26,13 @@ const Body = styled(StyledStartPage)`
   max-width: 340px;
   padding: 0px 10px;
   max-height: 95vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
-    scrollbar-color: #6969dd #e0e0e0;
-    scrollbar-width: thin;
+  scrollbar-color: #6969dd #e0e0e0;
+  scrollbar-width: thin;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -38,6 +41,7 @@ const Body = styled(StyledStartPage)`
   }
   &::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    max-height: 10px;
   }
 `;
 const MyWelcome = styled(Welcome)` 

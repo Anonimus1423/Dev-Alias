@@ -41,7 +41,7 @@ export const Gradient = styled.div`
     }
     @media(min-width: 725px)
     {
-        display: none;
+        display: none !important;
     }
 `
 export default function Teams({ teams }) 

@@ -38,7 +38,7 @@ const EButtons = styled.div`
     display:flex;
     flex-direction:column;
     padding-right:5px;
-    gap:8px;
+    gap:6px;
 `
 const EButton = styled.button`
     background:inherit;
@@ -49,7 +49,7 @@ const EButton = styled.button`
     path{   
         fill: ${({theme})=>theme.colors.quartersColor} 
     }
-    padding: 3px 5px;
+    padding: 0px 3px;
     transition: 0.3s;
     &:active{
         background: ${({theme})=>theme.colors.quartersColor};

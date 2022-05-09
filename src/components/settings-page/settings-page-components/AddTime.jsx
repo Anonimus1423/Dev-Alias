@@ -14,7 +14,7 @@ const TimersBlock = styled.div`
 
 const TimerBlock = styled.div`
     width:20%;
-    padding:20px 0px;
+    padding: 10px 0px;
     cursor:pointer;
     border: 1px solid  ${({ theme }) => theme.colors.quartersColor};
     color: ${props => props.selected ?   ({ theme }) => theme.colors.secondColor :  ({ theme }) => theme.colors.quartersColor};
