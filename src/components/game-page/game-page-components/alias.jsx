@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { AddPointer, DeletePointer } from "../../../store/reducers/team-reducer";
+import { useEffect } from "react";
 
 const Quests = styled.div`
     display:flex;
@@ -43,8 +44,7 @@ const QuestTitle = styled.div`
     padding: 10px 5px;
     opacity: ${props => props.isSelected ? "0.7" : "1"};
 `
-export const Alias = ({isGame}) => {
-    const [currentStartIndex,setCurrentStartIndex] = useState(0)
+export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex}) => {
     const aliasis = useSelector(state=>state.quests)
     const [answeredQuests,setAnsweredQuests] = useState([])
     const dispatch = useDispatch() 
@@ -54,6 +54,12 @@ export const Alias = ({isGame}) => {
         setQuests(aliasis.slice(currentStartIndex+5,currentStartIndex+10))
         setCurrentStartIndex(currentStartIndex + 5)
     }
+    useEffect(()=>{
+        if(!isGame){
+            console.log(currentStartIndex)
+            newQuests()
+        }
+    },[currentStartIndex])
     const addPoint = (e) => {
         if(answeredQuests.indexOf(e) === -1){
             setAnsweredQuests([...answeredQuests,e])
@@ -70,20 +76,9 @@ export const Alias = ({isGame}) => {
             setAnsweredQuests([...newAnswers])
             dispatch(DeletePointer(thisActiveIndex))
         }
-       
+        localStorage.setItem('index',currentStartIndex)
     }
-    // const passer = (e) => {
-    //     if(answeredQuests.indexOf(e) !== -1){
-    //         setAnsweredQuests([...answeredQuests,e])
-    //     }else{
-    //         setAnser
-    //     }
-    //     setAnswers(answers + 1)
-    //     if(answers === 4){
-    //         setAnswers(0)
-    //         newQuests()
-    //     }
-    // }
+  
     return(
         <Quests>
             {quests.map((e)=>{

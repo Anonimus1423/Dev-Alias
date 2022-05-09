@@ -19,7 +19,6 @@ export const Router = () =>
   const dispatch = useDispatch()
   useEffect(()=>{
     let PrevGame = JSON.parse(localStorage.getItem('game')) || {teams:[]}
-    console.log(PrevGame)
     if(PrevGame.teams.teams.length){
       dispatch(localSet(PrevGame.teams.teams))
       dispatch(changePoint(PrevGame.point.points))

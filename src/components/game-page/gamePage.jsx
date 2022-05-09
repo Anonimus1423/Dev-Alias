@@ -25,6 +25,7 @@ export default function GamePage({ page, setPage }) {
   const [teamOrder, setTeamOrder] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const teams = useSelector(state => state.teams.teams);
+  
     
     return (
         <SlideContainer className={className}>

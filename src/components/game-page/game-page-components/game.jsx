@@ -34,11 +34,15 @@ export const Game = ({ isGame,setIsGame }) => {
   const thisActiveIndex = useSelector(state=>state.index);
   const team = useSelector(state => state.teams.teams[thisActiveIndex])
   const className = !isGame ? "back" : "forward";
+  const [currentStartIndex,setCurrentStartIndex] = useState(Number.parseInt(localStorage.getItem('index')) || 0)
+  useEffect(()=>{
+    localStorage.setItem('index',currentStartIndex)
+  },[currentStartIndex])
   return (
     <StyledGame className={className}>
       {isGame ? <TeamTitle>{team.name || ''}</TeamTitle> : ''}
-      {isGame ? <Alias/> : ''}
-      <Timer isGame={isGame} setIsGame={setIsGame}/>
+      {isGame ? <Alias isGame={isGame} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/> : ''}
+      <Timer isGame={isGame} setIsGame={setIsGame}  currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/>
     </StyledGame>
   )
 }
