@@ -4,9 +4,25 @@ import PropTypes from 'prop-types';
 import { Button, goBottom } from '../../../styles/global-components'
 import { GameTitle } from '../../start-page/start-page'
 import { TextDrop } from '../../global/text-drop'
-import { useSelector } from 'react-redux';
 
 const StyledStartGame = styled.div`
+    transition: 0.4s;
+    transform: scale(1);
+    opacity: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    &.back
+    {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    &.forward
+    {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
 `
 const Top = styled.div` 
     border-bottom: 2px solid ${({ theme }) => theme.colors.mainColor};
@@ -46,11 +62,12 @@ const MyGameTitle = styled(GameTitle)`
     } 
 
 `
-export default function StartGame({ setIsGame, teamOrder, teams, page }) 
+export default function StartGame({ setIsGame, teamOrder, teams, page, isGame }) 
 {
     const team = teams[teamOrder];
+    const className = isGame ? "back" : "forward";
     return (
-        <StyledStartGame>
+        <StyledStartGame className={className}>
             <MyGameTitle>
                 <TextDrop start={page === 2} string='DEV ALIAS' delay={0.08} startDelay={0}/>
             </MyGameTitle>
@@ -62,7 +79,7 @@ export default function StartGame({ setIsGame, teamOrder, teams, page })
                 <TeamName>Score</TeamName>
                 <Scores>{team?.score}</Scores>
             </Top>
-            <MyButton>Start Round</MyButton>
+            <MyButton onClick={() => setIsGame(true)}>Start Round</MyButton>
         </StyledStartGame>
     )
 }

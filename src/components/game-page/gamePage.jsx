@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Container, SlideContainer } from '../../styles/global-components';
+import { SlideContainer } from '../../styles/global-components';
 import StartGame from './game-page-components/start-game';
 import Teams from './game-page-components/teams';
 import Icons from './game-page-components/icons';
+import { Game } from './game-page-components/game';
 
 const StyledGameContainer = styled.div` 
     width: 100vw;
@@ -31,13 +32,8 @@ export default function GamePage({ page, setPage }) {
                 <Teams teams={teams} />
                 <Icons setPage={setPage}/>
                 <StyledGamePage>
-                    {
-                        isGame
-                        ?
-                        <GamePage />
-                        :
-                        <StartGame page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
-                    }
+                    <Game isGame={isGame} />
+                    <StartGame isGame={isGame} page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
                 </StyledGamePage>
             </StyledGameContainer>
         </SlideContainer>
