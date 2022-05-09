@@ -109,6 +109,7 @@ export const SlideContainer = styled.div`
     width: 100%;
     left: 50%;
     top: 0%;
+    overflow: hidden;
     transform: translateX(-50%);
     &.left
     {

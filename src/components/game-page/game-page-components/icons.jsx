@@ -28,7 +28,7 @@ export default function Icons({ setPage }) {
         dispatch(localSet([]))
         dispatch(changePoint(120))
         dispatch(changeTime(60))
-        setPage(1)
+        setPage(0)
         localStorage.removeItem('game')
     }
     return (
