@@ -19,14 +19,14 @@ function App() {
           toastOptions={{
             // Define default options
             className: 'toast-body',
-            duration: 3000,
+            duration: 3500,
             style: {
               background: '#363636',
               color: '#fff',
             },
             // Default options for specific types
             success: {
-              duration: 3000,
+              duration: 3500,
               theme: {
                 primary: 'green',
                 secondary: 'black',

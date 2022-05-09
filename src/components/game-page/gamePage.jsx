@@ -32,7 +32,7 @@ export default function GamePage({ page, setPage }) {
                 <Teams teams={teams} />
                 <Icons setPage={setPage}/>
                 <StyledGamePage>
-                    <Game isGame={isGame} />
+                    <Game isGame={isGame} setIsGame={setIsGame} />
                     <StartGame isGame={isGame} page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
                 </StyledGamePage>
             </StyledGameContainer>

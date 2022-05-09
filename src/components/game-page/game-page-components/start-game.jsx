@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, goBottom } from '../../../styles/global-components'
 import { GameTitle } from '../../start-page/start-page'
 import { TextDrop } from '../../global/text-drop'
+import { useSelector } from 'react-redux';
 
 const StyledStartGame = styled.div`
     transition: 0.4s;
@@ -64,7 +65,8 @@ const MyGameTitle = styled(GameTitle)`
 `
 export default function StartGame({ setIsGame, teamOrder, teams, page, isGame }) 
 {
-    const team = teams[teamOrder];
+    const thisActiveIndex = useSelector(state=>state.index);
+    const team = teams[thisActiveIndex];
     const className = isGame ? "back" : "forward";
     return (
         <StyledStartGame className={className}>
