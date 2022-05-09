@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 
 const IActionTypes = {
   AddTeam: 'AddTeam',
@@ -14,7 +15,7 @@ export default function teamReducer(state = defaultState, action)
   switch(action.type)
   {
   case IActionTypes.AddTeam:
-    return {...state, teams: [...state.teams, { id: state.teams.length, name: action.payload.teamName, score: 0 }]};
+    return {...state, teams: [...state.teams, { id: uuidv4(), name: action.payload.teamName, score: 0 }]};
   case IActionTypes.RemoveTeam:
     stateTeams = stateTeams.filter(el=>{
       return el.id !== action.payload.teamId;

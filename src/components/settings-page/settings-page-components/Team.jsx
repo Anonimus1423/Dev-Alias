@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { selectNewTeamName,removeTeamAction } from '../../../store/reducers/team-reducer';
 import { DeleteIcon, RenameIcon, AcceptIcon, DeclineIcon } from '../../../assets/icons/settings';
@@ -60,10 +60,11 @@ const TeamName = styled.div`
     color: ${({ theme }) => theme.colors.secondTextColor};
 `;
 
-export const Team = ({id,teamName}) => 
+export const Team = ({id,teamName,ThisTeam}) => 
 {
   const [isInputing, setIsInputing] = useState(false);
   const [renameInput, setRenameInput] = useState(teamName);
+  const teams = useSelector(state=>state.teams.teams)
   const input = useRef();
   const dispatch = useDispatch();
   useEffect(() => 
@@ -78,7 +79,7 @@ export const Team = ({id,teamName}) =>
   };
   const selectNewName = e => {
     e.preventDefault();
-    dispatch(selectNewTeamName(id,renameInput));
+    dispatch(selectNewTeamName(teams.indexOf(ThisTeam),renameInput));
     setIsInputing(false);
   };
   return(
@@ -107,6 +108,7 @@ export const Team = ({id,teamName}) =>
 };
 
 Team.propTypes = {
-  id: PropTypes.number,
-  teamName: PropTypes.string 
+  id: PropTypes.string,
+  teamName: PropTypes.string,
+  ThisTeam: PropTypes.object 
 };

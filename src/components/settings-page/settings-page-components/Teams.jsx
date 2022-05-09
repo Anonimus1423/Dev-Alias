@@ -37,7 +37,7 @@ export const Teams = ({ teams }) => {
           ?
           teams.map((e, i)=>{
             return(
-              <Team key={i} id={e.id} teamName={ e.name }/>
+              <Team key={i} id={e.id} teamName={ e.name } ThisTeam={e}/>
             );
           })
           :
