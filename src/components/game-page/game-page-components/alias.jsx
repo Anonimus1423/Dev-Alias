@@ -27,7 +27,7 @@ const Negative = styled.div`
 `
 export const Alias = ({isGame}) => {
     const [currentStartIndex,setCurrentStartIndex] = useState(0)
-    const aliasis = useSelector(state=>state.quests)
+     const aliasis = useSelector(state=>state.quests)
     const [quests,setQuests] = useState(aliasis.slice(currentStartIndex,currentStartIndex+5))
     return(
         <Quests>

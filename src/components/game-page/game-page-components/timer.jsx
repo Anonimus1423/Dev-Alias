@@ -42,7 +42,7 @@ export const Timer = ({isGame,setIsGame}) => {
             }else{
               setSelectedMaxTime(selectedMaxTime-1)
             }
-          },100)
+          },800)
           return () => clearInterval(timer);
         }
     },[selectedMaxTime,isGame])
