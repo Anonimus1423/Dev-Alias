@@ -44,7 +44,7 @@ export const Gradient = styled.div`
         display: none !important;
     }
 `
-export default function Teams({ teams }) 
+function Teams({ teams }) 
 {
     const sortedTeam = teams.sort((a, b) => b.score - a.score)
     return (
@@ -56,3 +56,5 @@ export default function Teams({ teams })
         </div>
     )
 }
+
+export default Teams

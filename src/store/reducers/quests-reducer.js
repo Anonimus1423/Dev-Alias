@@ -1,6 +1,6 @@
 
 
-const defaultState = [
+let defaultState = [
     "alert",
     "atob",
     "blur",
@@ -99,7 +99,36 @@ const defaultState = [
     "Math.tanh(x)",
     "Math.toSource()"
 ]
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    while (0 !== currentIndex) {
+  
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
-export function questsReducer(state=defaultState,action){
-    return state
+const QuestsActions = {
+    Restart: 'restart-quests'
+}
+export function questsReducer(state=!localStorage.getItem('game') ? shuffle(defaultState) : defaultState ,action){
+    switch(action.type){
+        case QuestsActions.Restart:
+            return [ ...shuffle(defaultState)]
+        default:
+            return state
+    }
+}
+
+export const RestartQuests = () => {
+    return {
+        type: QuestsActions.Restart,
+    }
 }

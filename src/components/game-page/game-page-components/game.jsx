@@ -2,7 +2,12 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import { changePoint } from '../../../store/reducers/point-reducer'
+import { RestartQuests } from '../../../store/reducers/quests-reducer'
+import { localSet } from '../../../store/reducers/team-reducer'
+import { changeTime } from '../../../store/reducers/time-reducer'
 import { Alias } from './alias';
 import { Timer } from './timer';
 
@@ -25,24 +30,44 @@ const StyledGame = styled.div`
   }
 `
 const TeamTitle = styled.h2`
-  font-size: 28px;
+  font-size: 34px;
+  margin-bottom: 20px;
   font-weight: bold;
   text-align:center;
 `
 
-export const Game = ({ isGame,setIsGame }) => {
+export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,setPage }) => {
   const thisActiveIndex = useSelector(state=>state.index);
   const team = useSelector(state => state.teams.teams[thisActiveIndex])
+  const maxPoints = useSelector(state => state.point.points)
   const className = !isGame ? "back" : "forward";
-  const [currentStartIndex,setCurrentStartIndex] = useState(Number.parseInt(localStorage.getItem('index')) || 0)
   const [wonScore,setWonScore] = useState(0)
+  const dispatch = useDispatch()
+
+  const closeAndDeleteLocal = () => {
+    dispatch(localSet([]))
+    dispatch(changePoint(120))
+    dispatch(changeTime(60))
+    dispatch(RestartQuests())
+    setPage(0)
+    setCurrentStartIndex(0)
+    localStorage.removeItem('game')
+    localStorage.removeItem('index')
+}
   useEffect(()=>{
     localStorage.setItem('index',currentStartIndex)
+    
   },[currentStartIndex])
+ useEffect(()=>{
+  if(!isGame && team?.score >= maxPoints){
+    setPage(4)
+    closeAndDeleteLocal()
+  }
+ },[isGame])
   return (
     <StyledGame className={className}>
       <TeamTitle>{ team ? team.name : ''}</TeamTitle>
-      {isGame ? <Alias isGame={isGame} setWonScore={setWonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/> : ''}
+      {isGame ? <Alias team={team} isGame={isGame} setPage={setPage} setWonScore={setWonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/> : ''}
       <Timer isGame={isGame} setIsGame={setIsGame} setWonScore={setWonScore}  wonScore={wonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/>
     </StyledGame>
   )

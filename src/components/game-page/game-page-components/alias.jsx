@@ -40,11 +40,13 @@ const QuestTitle = styled.div`
     font-size: 20px;
     font-weight: bold;
     text-align:center;
+    cursor: pointer;
     width: 100%;
+    transition: 0.3s easy;
     padding: 10px 5px;
-    opacity: ${props => props.isSelected ? "0.7" : "1"};
+    color: ${props => props.isSelected ? "#125B50" : "#FF6363"};
 `
-export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex,setWonScore}) => {
+export const Alias = ({team,isGame,currentStartIndex,setCurrentStartIndex,setWonScore,setPage}) => {
     const aliasis = useSelector(state=>state.quests)
     const [answeredQuests,setAnsweredQuests] = useState([])
     const dispatch = useDispatch() 
@@ -56,7 +58,6 @@ export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex,setWonScore
     }
     useEffect(()=>{
         if(!isGame){
-            console.log(currentStartIndex)
             newQuests()
         }
     },[currentStartIndex])
@@ -64,6 +65,7 @@ export const Alias = ({isGame,currentStartIndex,setCurrentStartIndex,setWonScore
         if(answeredQuests.indexOf(e) === -1){
             setAnsweredQuests([...answeredQuests,e])
             dispatch(AddPointer(thisActiveIndex))
+           
             setWonScore(prev => prev + 1)
             if(answeredQuests.length === 4){
                 setAnsweredQuests([])

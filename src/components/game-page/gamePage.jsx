@@ -25,15 +25,22 @@ export default function GamePage({ page, setPage }) {
   const [teamOrder, setTeamOrder] = useState(0);
   const [isGame, setIsGame] = useState(false);
   const teams = useSelector(state => state.teams.teams);
-  
+  const [currentStartIndex,setCurrentStartIndex] = useState(Number.parseInt(localStorage.getItem('index')) || 0)
+    
     
     return (
         <SlideContainer className={className}>
             <StyledGameContainer>
-                <Teams teams={teams} />
-                <Icons setPage={setPage}/>
+               {!isGame &&  <Teams teams={teams} />}
+                <Icons setPage={(e)=>{
+                    if(e === 0){
+                        setCurrentStartIndex(0)
+                        setIsGame(false)
+                    }
+                    setPage(e)
+                }}/>
                 <StyledGamePage>
-                    <Game isGame={isGame} setIsGame={setIsGame} />
+                    <Game isGame={isGame} setPage={setPage} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex} setIsGame={setIsGame} />
                     <StartGame isGame={isGame} page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />
                 </StyledGamePage>
             </StyledGameContainer>

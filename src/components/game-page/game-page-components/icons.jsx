@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { DeclineIcon, SettingIcon } from '../../../assets/icons/settings'
 import { changePoint } from '../../../store/reducers/point-reducer'
+import { RestartQuests } from '../../../store/reducers/quests-reducer'
 import { localSet } from '../../../store/reducers/team-reducer'
 import { changeTime } from '../../../store/reducers/time-reducer'
 
@@ -28,6 +29,7 @@ export default function Icons({ setPage }) {
         dispatch(localSet([]))
         dispatch(changePoint(120))
         dispatch(changeTime(60))
+        dispatch(RestartQuests())
         setPage(0)
         localStorage.removeItem('game')
         localStorage.removeItem('index')

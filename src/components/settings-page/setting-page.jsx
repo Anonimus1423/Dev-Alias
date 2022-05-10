@@ -76,7 +76,7 @@ const Button = styled(InvertedButton)`
   }
 `;
 
-export const SettingPage = ({ setPage, page }) => {
+export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
   let className = page > 1 ? 'top' : page !== 1 ? 'right' : 'middle';
   const teams = useSelector(state => state.teams.teams);
   const initialGame = useSelector(state=>state)
@@ -114,7 +114,7 @@ export const SettingPage = ({ setPage, page }) => {
           <AddPoints/>
           <Buttons>
             <Button onClick={changePage}>Start Alias</Button>
-            <Button onClick={() => setPage(0)}>Go Back</Button>
+            <Button onClick={() => SetAutoPrevPage()}>Go Back</Button>
           </Buttons>
         </Body>
       </StyledSettingPage>

@@ -16,6 +16,8 @@ const StyledRouter = styled.div`
 export const Router = () => 
 {
   const [page, setPage] = useState(0);
+  const [prevPage, setPrevPage] = useState(page || 0);
+
   const dispatch = useDispatch()
   useEffect(()=>{
     let PrevGame = JSON.parse(localStorage.getItem('game')) || {teams:[]}
@@ -27,11 +29,18 @@ export const Router = () =>
       setPage(2)
     }
   },[])
+  const SetAutoPage = (e) => {
+    setPrevPage(page)
+    setPage(e)
+  }
+  const SetAutoPrevPage = () => {
+    setPage(prevPage)
+  }
   return (
     <StyledRouter>
-      <StartPage setPage={setPage} page={page} />
-      <SettingPage setPage={setPage} page={page} />
-      <GamePage page={page} setPage={setPage}/>
+      <StartPage  setPage={SetAutoPage} page={page} />
+      <SettingPage SetAutoPrevPage={SetAutoPrevPage} setPage={SetAutoPage} page={page} />
+      <GamePage page={page} setPage={SetAutoPage}/>
     </StyledRouter>
   );
 };
