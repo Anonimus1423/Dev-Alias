@@ -66,6 +66,7 @@ export const Team = ({id,teamName,ThisTeam}) =>
   const [renameInput, setRenameInput] = useState(teamName);
   const teams = useSelector(state=>state.teams.teams)
   const input = useRef();
+  const isGame = !localStorage.getItem('game')
   const dispatch = useDispatch();
   useEffect(() => 
   {
@@ -98,7 +99,7 @@ export const Team = ({id,teamName,ThisTeam}) =>
           <>
             <TeamName>{teamName}</TeamName>
             <Buttons>
-              <Button onClick={()=>removeTeam()}><DeleteIcon/></Button>
+              {isGame &&  <Button onClick={()=>removeTeam()}><DeleteIcon/></Button>} 
               <Button onClick={()=>setIsInputing(true)}><RenameIcon/></Button>
             </Buttons>
           </>

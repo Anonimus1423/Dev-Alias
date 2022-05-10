@@ -80,6 +80,7 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
   let className = page > 1 ? 'top' : page !== 1 ? 'right' : 'middle';
   const teams = useSelector(state => state.teams.teams);
   const initialGame = useSelector(state=>state)
+  const isGame = !localStorage.getItem('game')
   const changePage = () => {
     if(teams.length >= 2)
     {
@@ -113,7 +114,7 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
           <AddTime/>
           <AddPoints/>
           <Buttons>
-            <Button onClick={changePage}>Start Alias</Button>
+            <Button onClick={changePage}>{isGame ? 'Start Alias' : 'Save'}</Button>
             <Button onClick={() => SetAutoPrevPage()}>Go Back</Button>
           </Buttons>
         </Body>

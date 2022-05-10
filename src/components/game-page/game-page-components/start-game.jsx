@@ -49,6 +49,11 @@ const TeamName = styled.h2`
 const Scores = styled.h2`
     text-align: center;
     font-size: 24px; 
+    max-width:60%;
+    overflow-x:scroll;
+    &&::-webkit-scrollbar {
+        display: none;
+      }
 `
 const MyButton = styled(Button)` 
     margin-top: 20px;

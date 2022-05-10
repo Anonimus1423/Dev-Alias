@@ -32,8 +32,14 @@ const StyledGame = styled.div`
 const TeamTitle = styled.h2`
   font-size: 34px;
   margin-bottom: 20px;
-  font-weight: bold;
+  font-weight: bold; 
   text-align:center;
+  margin: 0px auto;
+  max-width:50%;
+  overflow-x:scroll;
+  &&::-webkit-scrollbar {
+      display: none;
+    }
 `
 
 export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,setPage }) => {
