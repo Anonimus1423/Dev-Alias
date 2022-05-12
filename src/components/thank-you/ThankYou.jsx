@@ -53,9 +53,7 @@ const Button = styled(InvertedButton)`
   }
 `;
 function ThankYou({page,setPage,WictoryTeamName,FinishTeams}){
-    console.log(page)
     let className = page > 3 ? 'middle' :'left';
-    console.log(WictoryTeamName)
     return (
         <SlideContainer className={className}>
             <ThankYouBlock>
