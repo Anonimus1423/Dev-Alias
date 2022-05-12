@@ -45,9 +45,10 @@ const TeamTitle = styled.h2`
 export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,setPage }) => {
   const thisActiveIndex = useSelector(state=>state.index);
   const team = useSelector(state => state.teams.teams[thisActiveIndex])
+  const teams = useSelector(state => state.teams.teams)
   const maxPoints = useSelector(state => state.point.points)
   const className = !isGame ? "back" : "forward";
-  const [wonScore,setWonScore] = useState(0)
+  const [wonScore,setWonScore] = useState(null)
   const dispatch = useDispatch()
 
   const closeAndDeleteLocal = () => {
@@ -55,7 +56,7 @@ export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,s
     dispatch(changePoint(120))
     dispatch(changeTime(60))
     dispatch(RestartQuests())
-    setPage(0)
+    setPage(4,team.name,teams)
     setCurrentStartIndex(0)
     localStorage.removeItem('game')
     localStorage.removeItem('index')
@@ -65,11 +66,10 @@ export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,s
     
   },[currentStartIndex])
  useEffect(()=>{
-  if(!isGame && team?.score >= maxPoints){
-    setPage(4)
+  if(wonScore === 0 && team?.score >= Number.parseInt(maxPoints)){
     closeAndDeleteLocal()
   }
- },[isGame])
+ },[wonScore])
   return (
     <StyledGame className={className}>
       <TeamTitle>{ team ? team.name : ''}</TeamTitle>

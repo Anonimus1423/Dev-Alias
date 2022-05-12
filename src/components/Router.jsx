@@ -8,6 +8,7 @@ import { changeTime } from '../store/reducers/time-reducer';
 import GamePage from './game-page/gamePage';
 import { SettingPage } from './settings-page/setting-page';
 import { StartPage } from './start-page/start-page';
+import ThankYou from './thank-you/ThankYou';
 
 const StyledRouter = styled.div`
     
@@ -17,6 +18,8 @@ export const Router = () =>
 {
   const [page, setPage] = useState(0);
   const [prevPage, setPrevPage] = useState(page || 0);
+  const [WictoryTeamName, setWictoryTeamName] = useState('');
+  const [FinishTeams, setFinishTeams] = useState([]);
 
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -29,9 +32,13 @@ export const Router = () =>
       setPage(2)
     }
   },[])
-  const SetAutoPage = (e) => {
+  const SetAutoPage = (e,TeamName,teams) => {
     setPrevPage(page)
     setPage(e)
+    if(e === 4){
+      setWictoryTeamName(TeamName)
+      setFinishTeams(teams)
+    }
   }
   const SetAutoPrevPage = () => {
     setPage(prevPage)
@@ -41,6 +48,7 @@ export const Router = () =>
       <StartPage  setPage={SetAutoPage} page={page} />
       <SettingPage SetAutoPrevPage={SetAutoPrevPage} setPage={SetAutoPage} page={page} />
       <GamePage page={page} setPage={SetAutoPage}/>
+      <ThankYou page={page} FinishTeams={FinishTeams} WictoryTeamName={WictoryTeamName} setPage={SetAutoPage}/>
     </StyledRouter>
   );
 };
