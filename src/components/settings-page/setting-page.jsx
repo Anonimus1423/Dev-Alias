@@ -115,7 +115,7 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
           <AddPoints/>
           <Buttons>
             <Button onClick={changePage}>{isGame ? 'Start Alias' : 'Save'}</Button>
-            <Button onClick={() => SetAutoPrevPage()}>Go Back</Button>
+            <Button onClick={() => SetAutoPrevPage()}>{isGame ? 'Go Back' : 'Cancel'}</Button>
           </Buttons>
         </Body>
       </StyledSettingPage>

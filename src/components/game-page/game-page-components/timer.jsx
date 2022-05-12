@@ -48,7 +48,7 @@ export const Timer = ({isGame,setIsGame,setCurrentStartIndex,wonScore,setWonScor
             }else{
               setSelectedMaxTime(selectedMaxTime-1)
             }
-          },200)
+          },800)
           return () => clearInterval(timer);
         }
     },[selectedMaxTime,isGame])
