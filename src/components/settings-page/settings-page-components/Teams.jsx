@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React from 'react';
 import styled from 'styled-components';
-import { Team } from "./Team";
+import { Team } from './Team';
+import PropTypes from 'prop-types';
 
 const StyledTeams = styled.div` 
     margin-top: 25px;
-`
+`;
 const None = styled.p`
     font-size: 16px;
     text-align: center;
@@ -26,22 +27,25 @@ const None = styled.p`
         width: 100%;
         background-color: ${({ theme }) => theme.colors.quartersColor};
     }
-`
+`;
 
 export const Teams = ({ teams }) => {
-    return(
-        <StyledTeams>
-            {
-                teams.length 
-                ?
-                teams.map((e, i)=>{
-                    return(
-                        <Team key={i} id={e.id} teamName={ e.name }/>
-                    )
-                })
-                :
-                <None>Add minimum 2 teams</None>
-            }
-        </StyledTeams>
-    )
-}
+  return(
+    <StyledTeams>
+      {
+        teams.length 
+          ?
+          teams.map((e, i)=>{
+            return(
+              <Team key={i} id={e.id} teamName={ e.name } ThisTeam={e}/>
+            );
+          })
+          :
+          <None>Add minimum 2 teams</None>
+      }
+    </StyledTeams>
+  );
+};
+Teams.propTypes = {
+  teams: PropTypes.array
+};

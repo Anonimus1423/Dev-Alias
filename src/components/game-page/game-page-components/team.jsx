@@ -9,6 +9,8 @@ const StyledTeam = styled.div`
     margin-top: 10px;
     width: 150px;
     border-radius: 4px;
+    position: relative;
+    z-index: -1;
     border-bottom: 3px solid ${({ theme }) => theme.colors.secondColor};
     &:first-child
     {
@@ -19,6 +21,11 @@ const Name = styled.p`
     color: ${({ theme }) => theme.colors.secondTextColor};
     font-size: 18px;
     font-weight: bold;
+    max-width:85%;
+    overflow-x:scroll;
+    &&::-webkit-scrollbar {
+        display: none;
+      }
 `
 const Score = styled.p`
     color: ${({ theme }) => theme.colors.secondTextColor};
