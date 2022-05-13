@@ -32,13 +32,15 @@ export default function GamePage({ page, setPage }) {
         <SlideContainer className={className}>
             <StyledGameContainer>
                {!isGame &&  <Teams teams={teams} />}
-                <Icons setPage={(e)=>{
-                    if(e === 0){
-                        setCurrentStartIndex(0)
-                        setIsGame(false)
-                    }
-                    setPage(e)
-                }}/>
+               {isGame && (
+                    <Icons setPage={(e)=>{
+                        if(e === 0){
+                            setCurrentStartIndex(0)
+                            setIsGame(false)
+                        }
+                        setPage(e)
+                    }}/>
+               )}
                 <StyledGamePage>
                     <Game isGame={isGame} setPage={setPage} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex} setIsGame={setIsGame} />
                     <StartGame isGame={isGame} page={page} teamOrder={teamOrder} setIsGame={setIsGame} teams={teams} />

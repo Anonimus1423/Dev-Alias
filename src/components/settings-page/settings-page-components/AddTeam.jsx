@@ -42,7 +42,7 @@ const Top = styled.form`
     align-items: stretch;
 `;
 
-export const AddTeam = ({ teams }) => 
+export const AddTeam = ({ teams=[] }) => 
 {
     const [teamName, setTeamName] = useState("");
     const dispatch = useDispatch();
@@ -50,25 +50,31 @@ export const AddTeam = ({ teams }) =>
     const addTeam = e =>
     {
         e.preventDefault();
-        if(teams.length < 10 ){
+        if(teams.length < 3 ){
             if(teamName !== "")
           {
-              dispatch(addTeamAction(teamName))
+            if(teamName.length >= 20){
+                if(!IsErrorWasPrintedScreen('You are richet character limit')){
+                    toast.error('You are richet character limit')
+                }
+            }else{
+                dispatch(addTeamAction(teamName))
+                setTeamName("")
+            }
           }
           else{
               dispatch(addTeamAction("team " + (teams.length + 1)))
           }
-          setTeamName("")
-        }else if(!IsErrorWasPrintedScreen('Team limit is 10')){
-            toast.error('Team limit is 10')
         }
     }
     return (
         <StyledAddTeam>
-            <Top>
-                <Input  value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
-                <Button onClick={addTeam}>Add</Button>
-            </Top>
+            {teams.length < 3 && (
+                 <Top>
+                    <Input  value={teamName} onChange={e => setTeamName(e.target.value)} placeholder='Write team name pls'/>
+                    <Button onClick={addTeam}>Add</Button>
+                </Top>
+            )}
             <Teams teams={teams}/>
         </StyledAddTeam>
     )
