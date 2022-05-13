@@ -11,7 +11,7 @@ function App() {
   return (
     <StyledApp>
       <Toaster
-          position="top-right"
+          position="top-left"
           reverseOrder={false}
           gutter={8}
           containerClassName=""
