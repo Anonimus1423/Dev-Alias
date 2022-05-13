@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const StyledTeam = styled.div` 
@@ -36,6 +36,10 @@ export default function Team({ team })
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
     const b = Math.floor(Math.random() * 255);
+    const [color, setColor] = useState(`rgb(${r}, ${g}, ${b})`);
+    useEffect(() => {
+        setColor(`rgb(${r}, ${g}, ${b})`)
+    })
     let colorBlack = false;
     if(r + g + b > 382)
     {
