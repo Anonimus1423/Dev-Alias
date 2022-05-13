@@ -53,7 +53,7 @@ const Button = styled(InvertedButton)`
   }
 `;
 function ThankYou({page,setPage,WictoryTeamName,FinishTeams}){
-    let className = page > 3 ? 'middle' :'left';
+    let className = page > 3 ? 'middle' : 'left';
     return (
         <SlideContainer className={className}>
             <ThankYouBlock>
@@ -64,7 +64,6 @@ function ThankYou({page,setPage,WictoryTeamName,FinishTeams}){
                     <Buttons>
                         <Button onClick={()=>setPage(0)}>New Game</Button>
                     </Buttons>
-                   
                 </Body>
                 <Teams teams={FinishTeams}/>
             </ThankYouBlock>
