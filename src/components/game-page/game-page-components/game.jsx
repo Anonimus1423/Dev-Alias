@@ -72,9 +72,12 @@ export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,s
  },[wonScore])
   return (
     <StyledGame className={className}>
-      <TeamTitle>{ team ? team.name : ''}</TeamTitle>
-      {isGame ? <Alias team={team} isGame={isGame} setPage={setPage} setWonScore={setWonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/> : ''}
-      <Timer isGame={isGame} setIsGame={setIsGame} setWonScore={setWonScore}  wonScore={wonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/>
+      <TeamTitle>
+          { team ? team.name : ''}
+          <Timer isGame={isGame} setIsGame={setIsGame} setWonScore={setWonScore}  wonScore={wonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/>
+      </TeamTitle>
+      {isGame ? <Alias team={team} isGame={isGame} wonScore={wonScore} setPage={setPage} setWonScore={setWonScore} currentStartIndex={currentStartIndex} setCurrentStartIndex={setCurrentStartIndex}/> : ''}
+      
     </StyledGame>
   )
 }

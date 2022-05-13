@@ -19,23 +19,6 @@ const Quest = styled.div`
     display:flex;
     width:100%;
 `
-
-const Positive = styled.div`
-    width:40%;
-    z-index:1000;
-    border-radius: 2px 10px 10px 2px;
-    background-color: green;
-    cursor: pointer;
-
-`
-const Negative = styled.div`
-    width:40%;
-    z-index:1000;
-    background-color: red;
-    cursor: pointer;
-    padding: 10px 0px;
-    border-radius: 10px 2px 2px 10px
-`
 const QuestTitle = styled.div`
     font-size: 20px;
     font-weight: bold;
@@ -46,7 +29,20 @@ const QuestTitle = styled.div`
     padding: 10px 5px;
     color: ${props => props.isSelected ? "#125B50" : "#FF6363"};
 `
-export const Alias = ({team,isGame,currentStartIndex,setCurrentStartIndex,setWonScore,setPage}) => {
+const ScoreText = styled.div`
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold; 
+    text-align:center;
+    margin: 0px auto;
+    max-width:50%;
+    margin-top: 20px;
+    overflow-x:scroll;
+    &&::-webkit-scrollbar {
+        display: none;
+    }
+`
+export const Alias = ({team,isGame,wonScore,currentStartIndex,setCurrentStartIndex,setWonScore,setPage}) => {
     const aliasis = useSelector(state=>state.quests)
     const [answeredQuests,setAnsweredQuests] = useState([])
     const dispatch = useDispatch() 
@@ -91,6 +87,7 @@ export const Alias = ({team,isGame,currentStartIndex,setCurrentStartIndex,setWon
                     </Quest>
                 )
             })}
+            <ScoreText>score: {wonScore}</ScoreText>
         </Quests>
     )
 }
