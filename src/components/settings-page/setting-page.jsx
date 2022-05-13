@@ -84,17 +84,17 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
   const changePage = () => {
     if(teams.length >= 2)
     {
-      if(initialGame.point.points > 10 && initialGame.point.points < 360){
+      if(initialGame.point.points >= 45 && initialGame.point.points <= 150){
         localStorage.setItem('game',JSON.stringify(initialGame))
         setPage(2);
     }else {
-        if(initialGame.point.points<11){
-            if(!IsErrorWasPrintedScreen('Minimum Victory Points` 10')){
-                toast.error("Minimum Victory Points` 10")
+        if(initialGame.point.points<45){
+            if(!IsErrorWasPrintedScreen('Minimum Victory Points` 45')){
+                toast.error("Minimum Victory Points` 45")
             }
         }else{
-            if(!IsErrorWasPrintedScreen('Maximum Victory Points` 360')){
-                toast.error("Maximum Victory Points` 360")
+            if(!IsErrorWasPrintedScreen('Maximum Victory Points` 150')){
+                toast.error("Maximum Victory Points` 150")
             }
         }
     }

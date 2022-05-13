@@ -11,7 +11,7 @@ const Points = styled.div`
 `
 const PoinstTitle = styled.div`
     color: ${({theme})=>theme.colors.quartersColor};
-    font-size:14px;
+    font-size:16px;
     margin: 10px 0px;
 `
 const PointBlock = styled.div`
@@ -64,19 +64,19 @@ export const AddPoints = () => {
     const dispatch = useDispatch()
     
     const ChangeLivePoints = (newPoints) => {
-        if(newPoints>10 && newPoints<360){
+        if(newPoints>=45 && newPoints<=150){
             dispatch(changePoint(newPoints))
         }else {
-            if(newPoints<11){
-                if(!IsErrorWasPrintedScreen('Minimum Victory Points` 10')){
-                    dispatch(changePoint(11))
-                    toast.error("Minimum Victory Points` 10")
+            if(newPoints<45){
+                if(!IsErrorWasPrintedScreen('Minimum Victory Points` 45')){
+                    toast.error("Minimum Victory Points` 45")
                 }
+                dispatch(changePoint(45))
             }else{
-                if(!IsErrorWasPrintedScreen('Maximum Victory Points` 360')){
-                    toast.error("Maximum Victory Points` 360")
-                    dispatch(changePoint(360))
+                if(!IsErrorWasPrintedScreen('Maximum Victory Points` 150')){
+                    toast.error("Maximum Victory Points` 0")
                 }
+                dispatch(changePoint(150))
             }
         }
     }
