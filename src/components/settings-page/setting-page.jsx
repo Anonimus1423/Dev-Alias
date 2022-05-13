@@ -85,8 +85,24 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
     if(teams.length >= 2)
     {
       if(initialGame.point.points >= 45 && initialGame.point.points <= 150){
-        localStorage.setItem('game',JSON.stringify(initialGame))
-        setPage(2);
+        const isGame = localStorage.getItem('game')
+        if(isGame){
+             let isTheMostValue = teams.some((el)=>{
+                 return el.score >= initialGame.point.points
+             })
+             if(isTheMostValue){
+                 if(!IsErrorWasPrintedScreen('Please write higher victory points')){
+                     toast.error("Please write higher victory points")
+                 }
+             }else{
+                localStorage.setItem('game',JSON.stringify(initialGame))
+                setPage(2);
+            }
+        }else{
+            localStorage.setItem('game',JSON.stringify(initialGame))
+            setPage(2);
+        }
+        
     }else {
         if(initialGame.point.points<45){
             if(!IsErrorWasPrintedScreen('Minimum Victory Points` 45')){

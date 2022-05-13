@@ -61,11 +61,26 @@ const EButton = styled.button`
 
 export const AddPoints = () => {
     const LivePoints = useSelector(state=>state.point.points)
+    const teams = useSelector(state=>state.teams.teams)
     const dispatch = useDispatch()
     
     const ChangeLivePoints = (newPoints) => {
         if(newPoints>=45 && newPoints<=150){
-            dispatch(changePoint(newPoints))
+            const isGame = localStorage.getItem('game')
+           if(isGame){
+                let isTheMostValue = teams.some((el)=>{
+                    return el.score >= newPoints
+                })
+                if(isTheMostValue){
+                    if(!IsErrorWasPrintedScreen('Please write higher victory points')){
+                        toast.error("Please write higher victory points")
+                    }
+                }else{
+                    dispatch(changePoint(newPoints))
+                }
+           }else{
+                dispatch(changePoint(newPoints))
+           }
         }else {
             if(newPoints<45){
                 if(!IsErrorWasPrintedScreen('Minimum Victory Points` 45')){
@@ -74,7 +89,7 @@ export const AddPoints = () => {
                 dispatch(changePoint(45))
             }else{
                 if(!IsErrorWasPrintedScreen('Maximum Victory Points` 150')){
-                    toast.error("Maximum Victory Points` 0")
+                    toast.error("Maximum Victory Points` 150")
                 }
                 dispatch(changePoint(150))
             }
@@ -87,7 +102,7 @@ export const AddPoints = () => {
                 VICTORY POINTS
             </PoinstTitle>
             <PointBlock>
-                <PointInput type='number' value={LivePoints} onChange={(e)=>dispatch(changePoint(e.target.value))}/>
+                <PointInput type='number' value={LivePoints} onChange={(e)=>dispatch(changePoint(Number.parseInt(e.target.value)))}/>
                 <EButtons>
                     <EButton onClick={()=>ChangeLivePoints(LivePoints+1)}>
                         <IncrementIcon/>
