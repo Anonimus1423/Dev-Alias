@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setActiveIndex } from '../store/reducers/active-index';
 import { changePoint } from '../store/reducers/point-reducer';
+import { ChangeRefresh } from '../store/reducers/refresh-index';
 import { localSet } from '../store/reducers/team-reducer';
 import { changeTime } from '../store/reducers/time-reducer';
 import GamePage from './game-page/gamePage';
@@ -11,12 +12,12 @@ import { StartPage } from './start-page/start-page';
 import ThankYou from './thank-you/ThankYou';
 
 const StyledRouter = styled.div`
-    
+ 
 `;
 
 export const Router = () => 
 {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(()=>JSON.parse(localStorage.getItem('game')) ? 3 : 0);
   const [prevPage, setPrevPage] = useState(page || 0);
   const [WictoryTeamName, setWictoryTeamName] = useState('');
   const [FinishTeams, setFinishTeams] = useState([]);
@@ -25,11 +26,12 @@ export const Router = () =>
   const dispatch = useDispatch()
   useEffect(()=>{
     let PrevGame = JSON.parse(localStorage.getItem('game')) || {teams:[]};
-    if(PrevGame.teams.teams){
+    if(PrevGame?.teams?.teams){
       dispatch(localSet(PrevGame.teams.teams))
       dispatch(changePoint(PrevGame.point.points))
       dispatch(changeTime(PrevGame.time.time))
       dispatch(setActiveIndex(PrevGame.index))
+      dispatch(ChangeRefresh(PrevGame.refresh))
       setPage(2)
     }
   },[])
@@ -46,10 +48,6 @@ export const Router = () =>
   }
   const SetAutoPrevPage = () => {
     setPage(prevPage)
-    dispatch(localSet(prevRedux.teams.teams))
-    dispatch(changePoint(prevRedux.point.points))
-    dispatch(changeTime(prevRedux.time.time))
-    dispatch(setActiveIndex(prevRedux.index))
   }
   return (
     <StyledRouter>

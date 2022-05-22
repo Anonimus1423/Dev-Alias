@@ -27,7 +27,6 @@ export default function GamePage({ page, setPage }) {
   const teams = useSelector(state => state.teams.teams);
   const [currentStartIndex,setCurrentStartIndex] = useState(Number.parseInt(localStorage.getItem('index')) || 0)
     
-    
     return (
         <SlideContainer className={className}>
             <StyledGameContainer>

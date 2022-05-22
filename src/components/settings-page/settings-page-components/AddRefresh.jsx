@@ -1,8 +1,12 @@
+
+
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import toast from 'react-hot-toast';
+import { IsErrorWasPrintedScreen } from '../../../hooks/toastCheck';
 import { v4 as uuidv4 } from 'uuid';
-import { changeTime } from '../../../store/reducers/time-reducer';
+import { ChangeRefresh } from '../../../store/reducers/refresh-index';
 
 
 const TimersBlock = styled.div`
@@ -79,29 +83,33 @@ const CustomInputRange = styled.input`
     //     background:   ${({ theme }) => theme.colors.secondColor};
     //   }
 `
-const times = [30,60,90,120]
 
-export const AddTime = () => {
-    const Time = useSelector(state=>state.time.time);
+export const AddRefresh = () => {
+    const Refresh = useSelector(state=>state.refresh);
     const dispatch = useDispatch()
-    const [inputRange,setInputRange] = useState(Time)
-    const selectTime = (time) => {
-        dispatch(changeTime(time))
-        setInputRange(time)
+    const [inputRange,setInputRange] = useState(Refresh)
+    const selectRefresh = (newInput) => {
+        let isGame = JSON.parse(localStorage.getItem('game'))
+        if(!isGame){
+            dispatch(ChangeRefresh(newInput.target.value))
+            setInputRange(newInput.target.value)
+        }else if(!IsErrorWasPrintedScreen('You can not change this field on game')){
+            toast.error('You can not change this field on game')
+        }
     }
 
     return(
        <Timer>
            <TimerTitle>
-               ROUND TIME
-               <span>{inputRange} S</span>
+               MAXIMUM REFRESH COUNTS
+               <span>{inputRange}</span>
            </TimerTitle>
             <TimersBlock>
                 {/* {times.map( ( e )=>{
                     return <TimerBlock selected={e === Time} key={uuidv4()} onClick={()=>selectTime(e)}>{e}</TimerBlock>
                 }) } */}
                 
-                <CustomInputRange value={inputRange} type='range' min='35' max='70' onChange={(e)=>selectTime(e.target.value)}/>
+                <CustomInputRange value={inputRange} type='range' min='1' max='10' onChange={(e)=>selectRefresh(e)}/>
             </TimersBlock>
        </Timer>
     );

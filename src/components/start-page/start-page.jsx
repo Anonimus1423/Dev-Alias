@@ -9,6 +9,8 @@ export const StyledStartPage = styled.div`
     position: absolute;
     left: 50%;
     top: 50%;
+    width: 100%;
+    heigth:100%;
     transform: translate(-50%, -50%); 
 `
 export const GameTitle = styled.h1`
@@ -38,7 +40,7 @@ export const Button = styled(btn)`
 
 export const StartPage = ({ page, setPage }) => 
 {
-  let className = page > 0 ? 'left' : page !== 0 ? 'right' : '';
+  let className = page > 0 ? 'left' : page !== 0 ? 'right' : 'middle';
   return (
     <SlideContainer className={className}>
       <TopWhite />

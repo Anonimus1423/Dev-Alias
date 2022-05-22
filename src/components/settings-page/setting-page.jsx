@@ -10,6 +10,7 @@ import { AddTime } from './settings-page-components/AddTime';
 import { AddPoints } from './settings-page-components/AddPoints';
 import toast from 'react-hot-toast';
 import { IsErrorWasPrintedScreen } from '../../hooks/toastCheck';
+import { AddRefresh } from './settings-page-components/AddRefresh';
 
 const StyledSettingPage = styled.div`
   position: absolute;
@@ -81,6 +82,7 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
   const teams = useSelector(state => state.teams.teams);
   const initialGame = useSelector(state=>state)
   const isGame = !localStorage.getItem('game')
+ 
   const changePage = () => {
     if(teams.length >= 2)
     {
@@ -95,7 +97,6 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
                      toast.error("Please write higher victory points")
                  }
              }else{
-                localStorage.setItem('game',JSON.stringify(initialGame))
                 setPage(2);
             }
         }else{
@@ -128,10 +129,11 @@ export const SettingPage = ({ setPage, page,SetAutoPrevPage }) => {
           </MyWelcome>
           <AddTeam teams={teams} />
           <AddTime/>
+          <AddRefresh/>
           <AddPoints/>
           <Buttons>
             <Button onClick={changePage}>{isGame ? 'Start Alias' : 'Save'}</Button>
-            <Button onClick={() => SetAutoPrevPage()}>{isGame ? 'Go Back' : 'Cancel'}</Button>
+            {isGame && (<Button onClick={() => SetAutoPrevPage()}>{isGame ? 'Go Back' : 'Cancel'}</Button>)}
           </Buttons>
         </Body>
       </StyledSettingPage>

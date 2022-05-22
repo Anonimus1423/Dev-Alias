@@ -6,18 +6,29 @@ const IActionTypes = {
   RenameTeam: 'RenameTeam',
   LocalSet: 'LocalSet',
   AddPoint: 'add-point',
-  DeletePoint: 'delete-point'
+  DeletePoint: 'delete-point',
+  RefreshNumber: 'refresh-number'
 };
 const defaultState = {
-  teams: []
+  teams: [
+    { id: uuidv4(), name: 'Team 1', score: 0,  refreshNumber: 0 },
+    { id: uuidv4(), name: 'Team 2', score: 0,  refreshNumber: 0 }
+  ]
 };
+const changeLocal = (teams) => {
+  let locals = JSON.parse(localStorage.getItem('game'))
+ if(locals){
+  locals.teams = teams.teams
+  localStorage.setItem('game',JSON.stringify(locals))
+ }
+}
 export default function teamReducer(state = defaultState, action)
 {
   let stateTeams = state.teams;
   switch(action.type)
   {
   case IActionTypes.AddTeam:
-    return {...state, teams: [...state.teams, { id: uuidv4(), name: action.payload.teamName, score: 0 }]};
+    return {...state, teams: [...state.teams, { id: uuidv4(), name: action.payload.teamName, score: 0,  refreshNumber: 0 }]};
   case IActionTypes.RemoveTeam:
     stateTeams = stateTeams.filter(el=>{
       return el.id !== action.payload.teamId;
@@ -27,12 +38,19 @@ export default function teamReducer(state = defaultState, action)
     return {...state,...action.payload}
   case IActionTypes.RenameTeam:
     stateTeams[action.payload.teamId].name = action.payload.newName;
+    changeLocal(stateTeams)
     return {...state,teams: [...stateTeams]};
   case IActionTypes.AddPoint:
     stateTeams[action.payload.index].score += 1
+    changeLocal(stateTeams)
     return {...state,teams: [...stateTeams]};
   case IActionTypes.DeletePoint:
     stateTeams[action.payload.index].score -= 1
+    changeLocal(stateTeams)
+    return {...state,teams: [...stateTeams]};
+  case IActionTypes.RefreshNumber:
+    stateTeams[action.payload.index].refreshNumber += 1
+    changeLocal(stateTeams)
     return {...state,teams: [...stateTeams]};
   default:
     return state;
@@ -80,6 +98,15 @@ export const AddPointer = (index) => {
 export const DeletePointer = (index) => {
   return{
     type:IActionTypes.DeletePoint,
+    payload:{
+      index
+    }
+  }
+}
+
+export const RefreshNumber = (index) => {
+  return{
+    type:IActionTypes.RefreshNumber,
     payload:{
       index
     }

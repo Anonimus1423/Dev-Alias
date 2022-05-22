@@ -50,7 +50,6 @@ export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,s
   const className = !isGame ? "back" : "forward";
   const [wonScore,setWonScore] = useState(null)
   const dispatch = useDispatch()
-
   const closeAndDeleteLocal = () => {
     dispatch(localSet([]))
     dispatch(changePoint(120))
@@ -66,10 +65,10 @@ export const Game = ({ isGame,setIsGame,currentStartIndex,setCurrentStartIndex,s
     
   },[currentStartIndex])
  useEffect(()=>{
-  if(wonScore === 0 && team?.score >= Number.parseInt(maxPoints)){
+  if(!isGame && teams[thisActiveIndex-1 >= 0 ? thisActiveIndex-1 : teams.length - 1]?.score >= Number.parseInt(maxPoints)){
     closeAndDeleteLocal()
   }
- },[wonScore])
+ })
   return (
     <StyledGame className={className}>
       <TeamTitle>

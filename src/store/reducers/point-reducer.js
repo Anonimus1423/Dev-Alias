@@ -4,9 +4,9 @@ export const pointsActions = {
     ChangePoint : 'change-point'
 }
 
-
+let isGame = JSON.parse(localStorage.getItem('game'))
 const defaultState = {
-    points:120
+    points: isGame ? isGame.point.points : 120
 }
 
 export default function pointsReducer(state = defaultState,action){

@@ -9,6 +9,10 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         font-family: redwing !important;
     }
+    .toast-body div
+    {
+        letter-spacing: 1.4px;
+    }
     body
     {
         background-color: ${({ theme }) => theme.colors.backgroundColor};

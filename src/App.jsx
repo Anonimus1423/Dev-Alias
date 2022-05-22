@@ -1,15 +1,15 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Toaster } from 'react-hot-toast';
 import styled from 'styled-components';
 import { Router } from './components/Router';
 
 const StyledApp = styled.div`
-  
+
 `;
 
 function App() {
   return (
-    <StyledApp>
+    <StyledApp >
       <Toaster
           position="top-left"
           reverseOrder={false}
@@ -33,7 +33,7 @@ function App() {
               },
             },
           }}
-/>
+      />
       <Router />
     </StyledApp>
   );

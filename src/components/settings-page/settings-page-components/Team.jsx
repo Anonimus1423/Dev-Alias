@@ -62,6 +62,7 @@ const TeamName = styled.div`
 
 export const Team = ({id,teamName,ThisTeam}) => 
 {
+
   const [isInputing, setIsInputing] = useState(false);
   const [renameInput, setRenameInput] = useState(teamName);
   const teams = useSelector(state=>state.teams.teams)

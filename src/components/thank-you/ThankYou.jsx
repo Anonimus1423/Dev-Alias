@@ -62,7 +62,7 @@ function ThankYou({page,setPage,WictoryTeamName,FinishTeams}){
                         <TextDrop start={page === 4} string={`Winner ${WictoryTeamName}`} delay={0.1} startDelay={0} />
                     </WinnerTitle>
                     <Buttons>
-                        <Button onClick={()=>setPage(0)}>New Game</Button>
+                        <Button onClick={()=>window.location.reload()}>New Game</Button>
                     </Buttons>
                 </Body>
                 <Teams teams={FinishTeams}/>

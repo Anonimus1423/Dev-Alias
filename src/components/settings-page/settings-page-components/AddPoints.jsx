@@ -1,117 +1,128 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import toast, { Toaster } from 'react-hot-toast';
-import styled from 'styled-components';
-import { DecrementIcon, IncrementIcon } from '../../../assets/icons/settings';
-import {changePoint} from '../../../store/reducers/point-reducer'
-import { IsErrorWasPrintedScreen } from '../../../hooks/toastCheck';
 
-const Points = styled.div`
-    margin-top: 20px;
+
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import toast from 'react-hot-toast';
+import { IsErrorWasPrintedScreen } from '../../../hooks/toastCheck';
+import { v4 as uuidv4 } from 'uuid';
+import { ChangeRefresh } from '../../../store/reducers/refresh-index';
+import { changePoint } from '../../../store/reducers/point-reducer';
+
+
+const TimersBlock = styled.div`
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
 `
-const PoinstTitle = styled.div`
-    color: ${({theme})=>theme.colors.quartersColor};
-    font-size:16px;
-    margin: 10px 0px;
-`
-const PointBlock = styled.div`
-    max-width:100%;
-    border:1px solid ${({ theme }) => theme.colors.quartersColor }};
-    padding: 5px;
+
+const TimerBlock = styled.div`
+    width:20%;
+    padding: 10px 0px;
+    cursor:pointer;
+    border: 1px solid  ${({ theme }) => theme.colors.quartersColor};
+    color: ${props => props.selected ?   ({ theme }) => theme.colors.secondColor :  ({ theme }) => theme.colors.quartersColor};
+    background-color:${props => props.selected ?  ({ theme }) => theme.colors.quartersColor : 'inherit'};
     display:flex;
     border-radius:3px;
+    align-items:center;
+    transition: 0.3s;
+    justify-content:center;
+    &:hover{
+        background-color: ${props => props.selected ? 'inherit' :  ({ theme }) => theme.colors.quartersColor };
+        color: ${props => props.selected ?  ({ theme }) => theme.colors.quartersColor  :   ({ theme }) => theme.colors.secondColor};
+    }
 `
-const PointInput = styled.input`
-    width:100%;
-    padding: 10px 6px;
-    background: inherit;
-    border:none;
-    outline: none;
+const TimerTitle = styled.div`
     color: ${({theme})=>theme.colors.quartersColor};
     font-size:16px;
-    &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    span{
+        font-size: 16px;
+        color: ${({theme})=>theme.colors.quartersColor};
     }
+    margin: 10px 0px;
 `
-const EButtons = styled.div`
-    display:flex;
-    flex-direction:column;
-    padding-right:5px;
-    gap:6px;
+const Timer = styled.div`
+    margin-top:20px;
 `
-const EButton = styled.button`
-    background:inherit;
-    border-radius: 3px;
-    cursor:pointer;
-    border: 1px solid ${({theme})=>theme.colors.quartersColor};
-    color:${({theme})=>theme.colors.quartersColor};
-    path{   
-        fill: ${({theme})=>theme.colors.quartersColor} 
+const CustomInputRange = styled.input`
+    -webkit-appearance: none; 
+    width: 100%;
+    background: transparent;
+    transition: 0.3s ease;
+    &::-webkit-slider-runnable-track{
+        width: 100%;
+        height: 13px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 0px 0px 0px #000000;
+        background: inherit;
+        border-radius: 25px;
+        transition: 0.3s ease;
+        border: 1px solid ${({theme})=>theme.colors.quartersColor};
     }
-    padding: 0px 3px;
-    transition: 0.3s;
-    &:active{
+    &::-webkit-slider-thumb {
+        box-shadow: 0px 0px 0px #000000;
+        border: 0px solid #000000;
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
         background: ${({theme})=>theme.colors.quartersColor};
-        path{
-            fill: ${({theme})=>theme.colors.secondColor};
-        }
-    }
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -4px;
+        transition: 0.3s ease;
+      }
+    //   &:focus::-webkit-slider-runnable-track {
+    //     background:${({ theme }) => theme.colors.quartersColor};
+    //   }
+    //   &:focus::-webkit-slider-thumb {
+    //     background:   ${({ theme }) => theme.colors.secondColor};
+    //   }
 `
 
 export const AddPoints = () => {
-    const LivePoints = useSelector(state=>state.point.points)
-    const teams = useSelector(state=>state.teams.teams)
+    const Points = useSelector(state=>state.point.points);
     const dispatch = useDispatch()
-    
-    const ChangeLivePoints = (newPoints) => {
-        if(newPoints>=45 && newPoints<=150){
-            const isGame = localStorage.getItem('game')
-           if(isGame){
-                let isTheMostValue = teams.some((el)=>{
-                    return el.score >= newPoints
-                })
-                if(isTheMostValue){
-                    if(!IsErrorWasPrintedScreen('Please write higher victory points')){
-                        toast.error("Please write higher victory points")
-                    }
-                }else{
-                    dispatch(changePoint(newPoints))
+    const teams = useSelector(state=>state.teams.teams)
+    const [inputRange,setInputRange] = useState(Points)
+    const selectPoint = (newPoints) => {
+        let isGame = JSON.parse(localStorage.getItem('game'))
+        if(isGame){
+            let isTheMostValue = teams.some((el)=>{
+                return el.score >= newPoints
+            })
+            if(isTheMostValue){
+                if(!IsErrorWasPrintedScreen('Please write higher victory points')){
+                    toast.error("Please write higher victory points")
                 }
-           }else{
-                dispatch(changePoint(newPoints))
-           }
-        }else {
-            if(newPoints<45){
-                if(!IsErrorWasPrintedScreen('Minimum Victory Points` 45')){
-                    toast.error("Minimum Victory Points` 45")
-                }
-                dispatch(changePoint(45))
             }else{
-                if(!IsErrorWasPrintedScreen('Maximum Victory Points` 150')){
-                    toast.error("Maximum Victory Points` 150")
-                }
-                dispatch(changePoint(150))
+                dispatch(changePoint(newPoints))
+                setInputRange(newPoints)
             }
+        }else{
+            dispatch(changePoint(newPoints))
+            setInputRange(newPoints)
         }
     }
 
     return(
-        <Points>
-            <PoinstTitle>
-                VICTORY POINTS
-            </PoinstTitle>
-            <PointBlock>
-                <PointInput type='number' value={LivePoints} onChange={(e)=>dispatch(changePoint(Number.parseInt(e.target.value)))}/>
-                <EButtons>
-                    <EButton onClick={()=>ChangeLivePoints(LivePoints+1)}>
-                        <IncrementIcon/>
-                    </EButton>
-                    <EButton onClick={()=>ChangeLivePoints(LivePoints-1)}>
-                        <DecrementIcon/>
-                    </EButton>
-                </EButtons>
-            </PointBlock>
-        </Points>
-    )
-}
+       <Timer>
+           <TimerTitle>
+               MAXIMUM VICTORY POINTS
+               <span>{inputRange}</span>
+           </TimerTitle>
+            <TimersBlock>
+                {/* {times.map( ( e )=>{
+                    return <TimerBlock selected={e === Time} key={uuidv4()} onClick={()=>selectTime(e)}>{e}</TimerBlock>
+                }) } */}
+                
+                <CustomInputRange value={inputRange} type='range' min='45' max='150' onChange={(e)=>selectPoint(e.target.value)}/>
+            </TimersBlock>
+       </Timer>
+    );
+};

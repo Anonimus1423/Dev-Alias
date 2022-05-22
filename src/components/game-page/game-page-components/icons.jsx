@@ -1,5 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid';
+
 import styled from 'styled-components'
 import { DeclineIcon, SettingIcon } from '../../../assets/icons/settings'
 import { changePoint } from '../../../store/reducers/point-reducer'
@@ -26,7 +28,10 @@ const StyledIcons = styled.div`
 export default function Icons({ setPage }) {
     const dispatch = useDispatch()
     const closeAndDeleteLocal = () => {
-        dispatch(localSet([]))
+        dispatch(localSet( [
+            { id: uuidv4(), name: 'Team 1', score: 0,  refreshNumber: 0 },
+            { id: uuidv4(), name: 'Team 2', score: 0,  refreshNumber: 0 }
+          ]))
         dispatch(changePoint(120))
         dispatch(changeTime(60))
         dispatch(RestartQuests())
